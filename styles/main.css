@@ -3240,3 +3240,1140 @@ body.light-theme #intro-story-overlay {
   letter-spacing: 3px;
   cursor: pointer;
 }
+
+/* ===== DaoRise visual redesign: mineral folio UI ===== */
+:root {
+  --folio-ink: #161210;
+  --folio-soot: #231c18;
+  --folio-paper: #e6ddc7;
+  --folio-paper-2: #d6c7a9;
+  --folio-panel: rgba(229, 220, 198, 0.88);
+  --folio-panel-solid: #e6ddc7;
+  --folio-card: rgba(247, 240, 221, 0.58);
+  --folio-line: rgba(54, 45, 38, 0.2);
+  --folio-line-strong: rgba(54, 45, 38, 0.48);
+  --folio-text: #241e19;
+  --folio-muted: #655d50;
+  --folio-title: #19120e;
+  --folio-red: #a84632;
+  --folio-oxide: #426e68;
+  --folio-lichen: #738b47;
+  --folio-violet: #4a3b47;
+  --folio-wash: rgba(168, 70, 50, 0.1);
+  --folio-shadow: 10px 10px 0 rgba(35, 28, 24, 0.12);
+  --folio-soft-shadow: 0 18px 40px rgba(35, 28, 24, 0.16);
+  --button-text: #f7f0dd;
+}
+
+body:not(.light-theme) {
+  --folio-ink: #120f0d;
+  --folio-soot: #221815;
+  --folio-paper: #19130f;
+  --folio-paper-2: #251c16;
+  --folio-panel: rgba(25, 19, 15, 0.9);
+  --folio-panel-solid: #19130f;
+  --folio-card: rgba(232, 210, 169, 0.06);
+  --folio-line: rgba(226, 204, 160, 0.18);
+  --folio-line-strong: rgba(226, 204, 160, 0.42);
+  --folio-text: #e6dcc5;
+  --folio-muted: #a69a82;
+  --folio-title: #f2e8ce;
+  --folio-red: #c45a3f;
+  --folio-oxide: #62a09a;
+  --folio-lichen: #a3b36a;
+  --folio-violet: #7d6679;
+  --folio-wash: rgba(196, 90, 63, 0.14);
+  --folio-shadow: 10px 10px 0 rgba(0, 0, 0, 0.28);
+  --folio-soft-shadow: 0 20px 48px rgba(0, 0, 0, 0.42);
+  --button-text: #161210;
+}
+
+body,
+button,
+input,
+textarea,
+select,
+.game-title,
+.subtitle,
+.byline,
+#realm-text,
+.save-title,
+.detail-title,
+.tab-btn,
+.bottom-btn,
+.cult-stat-label,
+.cult-stat-value,
+.dungeon-name,
+.dungeon-req,
+.item-name,
+.skill-name,
+.equip-name,
+.log-entry {
+  letter-spacing: 0 !important;
+}
+
+body {
+  color: var(--folio-text);
+  background:
+    repeating-linear-gradient(90deg, rgba(54, 45, 38, 0.045) 0 1px, transparent 1px 14px),
+    repeating-linear-gradient(0deg, rgba(54, 45, 38, 0.035) 0 1px, transparent 1px 18px),
+    linear-gradient(135deg, var(--folio-paper) 0%, #efe5cc 44%, var(--folio-paper-2) 100%);
+  font-family: "Microsoft YaHei", "PingFang SC", "Hiragino Sans GB", "STKaiti", "KaiTi", serif;
+}
+
+body:not(.light-theme) {
+  background:
+    repeating-linear-gradient(90deg, rgba(226, 204, 160, 0.035) 0 1px, transparent 1px 15px),
+    repeating-linear-gradient(0deg, rgba(226, 204, 160, 0.025) 0 1px, transparent 1px 19px),
+    linear-gradient(135deg, #120f0d 0%, #211713 46%, #2a2119 100%);
+}
+
+#main-container,
+#game-container {
+  background:
+    linear-gradient(90deg, rgba(168, 70, 50, 0.12) 0 10px, transparent 10px 100%),
+    repeating-linear-gradient(115deg, rgba(36, 30, 25, 0.035) 0 2px, transparent 2px 22px),
+    linear-gradient(135deg, var(--folio-paper) 0%, #eee3c9 42%, var(--folio-paper-2) 100%);
+}
+
+body:not(.light-theme) #main-container,
+body:not(.light-theme) #game-container {
+  background:
+    linear-gradient(90deg, rgba(196, 90, 63, 0.18) 0 10px, transparent 10px 100%),
+    repeating-linear-gradient(115deg, rgba(226, 204, 160, 0.036) 0 2px, transparent 2px 22px),
+    linear-gradient(135deg, #120f0d 0%, #211713 48%, #2a2119 100%);
+}
+
+#main-container::before,
+#game-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(90deg, transparent 0 67%, rgba(66, 110, 104, 0.12) 67% 68%, transparent 68% 100%),
+    repeating-linear-gradient(0deg, transparent 0 52px, rgba(168, 70, 50, 0.09) 52px 53px);
+  opacity: 0.72;
+  mask-image: linear-gradient(180deg, transparent, #000 12%, #000 90%);
+}
+
+.stars {
+  mix-blend-mode: multiply;
+  opacity: 0.5;
+}
+
+body:not(.light-theme) .stars {
+  mix-blend-mode: screen;
+  opacity: 0.42;
+}
+
+.star {
+  width: 3px !important;
+  height: 3px !important;
+  background: var(--folio-red);
+  border-radius: 0;
+  transform: rotate(45deg);
+}
+
+.cloud {
+  height: 1px !important;
+  border-radius: 0;
+  background: var(--folio-oxide);
+  opacity: 0.18;
+}
+
+.mountain {
+  height: 24%;
+  opacity: 0.22;
+  filter: saturate(0.65) contrast(1.15);
+}
+
+.mountain svg {
+  transform: scaleY(0.82);
+  transform-origin: bottom;
+}
+
+#main-container {
+  align-items: flex-start;
+  justify-content: center;
+  padding-left: 9vw;
+  padding-right: 24px;
+}
+
+.title-wrapper,
+.save-panel,
+#left-panel,
+#right-panel {
+  color: var(--folio-text);
+  border: 1px solid var(--folio-line-strong);
+  border-radius: 3px;
+  background:
+    linear-gradient(90deg, var(--folio-wash) 0 9px, transparent 9px 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.28), transparent 46%),
+    var(--folio-panel);
+  box-shadow: var(--folio-shadow), var(--folio-soft-shadow);
+  backdrop-filter: none;
+}
+
+body:not(.light-theme) .title-wrapper,
+body:not(.light-theme) .save-panel,
+body:not(.light-theme) #left-panel,
+body:not(.light-theme) #right-panel {
+  background:
+    linear-gradient(90deg, var(--folio-wash) 0 9px, transparent 9px 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), transparent 46%),
+    var(--folio-panel);
+}
+
+.title-wrapper {
+  width: min(560px, calc(100vw - 48px));
+  align-items: flex-start;
+  padding: 44px 46px 42px 58px;
+  gap: 14px;
+  transform: translateY(-2vh);
+}
+
+.title-wrapper::before,
+.save-panel::before,
+#left-panel::before,
+#right-panel::before {
+  content: "";
+  position: absolute;
+  inset: 9px;
+  border: 1px dashed rgba(168, 70, 50, 0.32);
+  border-radius: 1px;
+  pointer-events: none;
+}
+
+.title-wrapper::after {
+  content: "";
+  position: absolute;
+  right: -24px;
+  top: 30px;
+  width: 42px;
+  height: 72%;
+  border: 1px solid var(--folio-line-strong);
+  background:
+    repeating-linear-gradient(0deg, transparent 0 11px, var(--folio-red) 11px 12px),
+    var(--folio-paper-2);
+  box-shadow: 6px 6px 0 rgba(35, 28, 24, 0.12);
+}
+
+.game-title {
+  color: var(--folio-title);
+  font-size: 68px;
+  line-height: 0.98;
+  font-weight: 900;
+  text-align: left;
+  text-shadow: 2px 2px 0 rgba(168, 70, 50, 0.18);
+  animation: none;
+}
+
+.subtitle {
+  max-width: 420px;
+  margin: 2px 0 12px;
+  color: var(--folio-muted);
+  font-size: 19px;
+  line-height: 1.7;
+  text-shadow: none;
+}
+
+.byline {
+  margin: 0 0 18px;
+  padding-left: 12px;
+  border-left: 5px solid var(--folio-oxide);
+  color: var(--folio-violet);
+  font-size: 14px;
+  text-shadow: none;
+}
+
+.btn-start,
+.btn-explore,
+.intro-story-btn.primary,
+.demo-complete-btn,
+.btn-use {
+  color: var(--button-text) !important;
+  border: 1px solid var(--folio-red) !important;
+  border-radius: 2px !important;
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.24), transparent 38%),
+    var(--folio-red) !important;
+  box-shadow: 6px 6px 0 rgba(35, 28, 24, 0.18) !important;
+}
+
+.btn-start {
+  padding: 14px 42px;
+  font-size: 21px;
+}
+
+.btn-start::before {
+  display: none;
+}
+
+.btn-start:hover,
+.btn-explore:hover,
+.intro-story-btn.primary:hover,
+.demo-complete-btn:hover,
+.btn-use:hover {
+  transform: translate(-2px, -2px);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.28), transparent 38%),
+    #be563f !important;
+  box-shadow: 10px 10px 0 rgba(35, 28, 24, 0.2) !important;
+}
+
+#game-container {
+  display: grid;
+  grid-template-columns: minmax(320px, 31vw) minmax(0, 1fr);
+  gap: 16px;
+  padding: 18px;
+}
+
+#game-container.active {
+  display: grid;
+}
+
+#left-panel {
+  min-width: 0;
+  padding: 34px 24px 22px;
+  overflow: hidden;
+}
+
+#right-panel {
+  min-width: 0;
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  grid-template-rows: minmax(0, 1fr);
+  gap: 14px;
+  padding: 16px;
+}
+
+#realm-text,
+.save-title,
+.detail-title,
+.intro-story-title,
+.demo-complete-title {
+  color: var(--folio-title);
+  text-shadow: 2px 2px 0 rgba(168, 70, 50, 0.16);
+}
+
+#realm-divider,
+.cult-divider,
+.alchemy-divider {
+  height: 1px;
+  background: repeating-linear-gradient(90deg, var(--folio-red) 0 10px, transparent 10px 18px);
+}
+
+#progress-wrapper,
+#stats-row,
+.quick-btns,
+.bottom-btns {
+  width: 100%;
+}
+
+#progress-bar-outer,
+.skill-cultivate-bar-wrap,
+.achievement-progress {
+  height: 13px;
+  border: 1px solid var(--folio-line-strong);
+  border-radius: 2px;
+  background:
+    repeating-linear-gradient(90deg, rgba(36, 30, 25, 0.12) 0 7px, transparent 7px 14px),
+    rgba(255, 255, 255, 0.18);
+}
+
+#progress-bar-inner,
+.skill-cultivate-bar,
+.achievement-progress-bar {
+  border-radius: 1px;
+  background:
+    repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.22) 0 8px, transparent 8px 16px),
+    var(--folio-oxide);
+  box-shadow: none;
+}
+
+.stat-box,
+.cult-stat-row,
+.dungeon-card,
+.monster-row,
+.item-card,
+.skill-card,
+.equip-card,
+.challenge-result,
+.save-slot,
+.encounter-panel,
+.achievement-summary,
+.achievement-card,
+.encounter-option {
+  color: var(--folio-text);
+  border: 1px solid var(--folio-line);
+  border-radius: 3px;
+  background:
+    linear-gradient(90deg, rgba(66, 110, 104, 0.12) 0 4px, transparent 4px 100%),
+    var(--folio-card);
+  box-shadow: none;
+}
+
+.stat-box {
+  padding: 12px 8px;
+}
+
+.cult-stat-row {
+  margin-bottom: 8px;
+  padding: 12px 15px;
+}
+
+.dungeon-card,
+.item-card,
+.skill-card,
+.equip-card,
+.achievement-card {
+  gap: 14px;
+}
+
+.dungeon-card:hover,
+.item-card:hover,
+.skill-card:hover,
+.equip-card:hover,
+.save-slot:hover,
+.encounter-option:hover {
+  border-color: var(--folio-red);
+  background:
+    linear-gradient(90deg, rgba(168, 70, 50, 0.16) 0 4px, transparent 4px 100%),
+    rgba(255, 255, 255, 0.24);
+  transform: translate(-2px, -2px);
+  box-shadow: 5px 5px 0 rgba(35, 28, 24, 0.12);
+}
+
+body:not(.light-theme) .dungeon-card:hover,
+body:not(.light-theme) .item-card:hover,
+body:not(.light-theme) .skill-card:hover,
+body:not(.light-theme) .equip-card:hover,
+body:not(.light-theme) .save-slot:hover,
+body:not(.light-theme) .encounter-option:hover {
+  background:
+    linear-gradient(90deg, rgba(196, 90, 63, 0.18) 0 4px, transparent 4px 100%),
+    rgba(232, 210, 169, 0.08);
+}
+
+.dungeon-card.locked:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.stat-box-label,
+.cult-stat-label,
+.dungeon-req,
+.item-effect,
+.skill-desc,
+.equip-desc,
+.equip-cost,
+.detail-desc,
+.log-entry,
+#progress-label,
+.cult-formula,
+.achievement-desc,
+.achievement-count,
+.encounter-desc,
+.encounter-option-desc,
+.slot-info {
+  color: var(--folio-muted) !important;
+}
+
+.subtitle,
+.dungeon-name,
+.item-name,
+.skill-name,
+.equip-name,
+.encounter-title,
+.encounter-option-name,
+.achievement-title {
+  color: var(--folio-title) !important;
+}
+
+#stat-atk,
+#cult-equip-battle,
+.log-entry.lose,
+.challenge-result.lose .challenge-result-title {
+  color: var(--folio-red) !important;
+}
+
+#stat-hp,
+.log-entry.win,
+.skill-ring-pct {
+  color: var(--folio-lichen) !important;
+}
+
+#stat-stones,
+.skill-bonus,
+.equip-effect,
+.monster-drop,
+.log-entry.loot,
+.challenge-result-reward,
+.encounter-kicker,
+.encounter-option-tone,
+.achievement-status,
+.achievement-reward {
+  color: var(--folio-oxide) !important;
+}
+
+.cult-stat-value,
+.stat-box-value,
+#cult-gain,
+#cult-aptitude,
+#cult-skill,
+#cult-equip-cult,
+#cult-eta,
+#formula-atk,
+#formula-hp,
+#formula-gain,
+.slot-number,
+.slot-arrow {
+  color: var(--folio-oxide) !important;
+}
+
+#person-area,
+.explore-log,
+.alchemy-empty,
+.equip-empty,
+.tab-placeholder {
+  border: 1px solid var(--folio-line);
+  border-radius: 3px;
+  background:
+    repeating-linear-gradient(135deg, rgba(66, 110, 104, 0.08) 0 1px, transparent 1px 12px),
+    rgba(255, 255, 255, 0.15);
+}
+
+#person-area {
+  width: 100%;
+  margin-top: 16px;
+  clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+}
+
+#person-img {
+  filter: sepia(0.22) saturate(0.85) contrast(1.04);
+}
+
+#tab-bar {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin: 0;
+  padding: 8px;
+  border: 1px solid var(--folio-line);
+  border-radius: 3px;
+  background:
+    repeating-linear-gradient(0deg, rgba(168, 70, 50, 0.08) 0 1px, transparent 1px 15px),
+    rgba(255, 255, 255, 0.14);
+}
+
+.tab-btn,
+.bottom-btn,
+.btn-back,
+.btn-back-dungeon,
+.btn-import,
+.btn-cultivate-skill,
+.btn-upgrade,
+.intro-story-btn {
+  min-height: 38px;
+  color: var(--folio-text);
+  border: 1px solid var(--folio-line);
+  border-radius: 2px;
+  background: transparent;
+  text-shadow: none;
+  box-shadow: none;
+}
+
+.tab-btn {
+  flex: 0 0 auto;
+  padding: 11px 8px;
+  font-size: 14px;
+  text-align: left;
+}
+
+.tab-btn:hover,
+.bottom-btn:hover,
+.btn-back:hover,
+.btn-back-dungeon:hover,
+.btn-import:hover,
+.btn-cultivate-skill:hover,
+.btn-upgrade:hover,
+.intro-story-btn:hover {
+  color: var(--folio-title);
+  border-color: var(--folio-red);
+  background: rgba(168, 70, 50, 0.1);
+  box-shadow: none;
+}
+
+.tab-btn.active {
+  color: var(--button-text);
+  border-color: var(--folio-red);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.22), transparent 42%),
+    var(--folio-red);
+  text-shadow: none;
+}
+
+#tab-content {
+  min-width: 0;
+  overflow-y: auto;
+  padding: 2px 8px 2px 2px;
+  scrollbar-color: var(--folio-red) transparent;
+}
+
+.detail-header {
+  align-items: stretch;
+}
+
+.detail-title {
+  display: flex;
+  align-items: center;
+  min-height: 40px;
+  border-bottom: 1px solid var(--folio-line);
+}
+
+.btn-tribulation {
+  color: var(--button-text);
+  border: 1px solid var(--folio-violet);
+  border-radius: 2px;
+  background: var(--folio-violet);
+  box-shadow: 6px 6px 0 rgba(35, 28, 24, 0.16);
+}
+
+.btn-tribulation:hover {
+  color: var(--button-text);
+  background: #5f4b5a;
+  box-shadow: 8px 8px 0 rgba(35, 28, 24, 0.18);
+}
+
+.save-panel {
+  min-width: min(460px, calc(100vw - 32px));
+  padding: 34px 40px 32px 48px;
+}
+
+#save-overlay {
+  background:
+    repeating-linear-gradient(135deg, rgba(36, 30, 25, 0.08) 0 1px, transparent 1px 14px),
+    rgba(36, 30, 25, 0.24);
+}
+
+body:not(.light-theme) #save-overlay {
+  background:
+    repeating-linear-gradient(135deg, rgba(226, 204, 160, 0.04) 0 1px, transparent 1px 14px),
+    rgba(0, 0, 0, 0.48);
+}
+
+.save-import-input {
+  color: var(--folio-text);
+  border: 1px solid var(--folio-line-strong);
+  border-radius: 2px;
+  background: var(--folio-card);
+}
+
+.save-import-input:focus {
+  border-color: var(--folio-red);
+  box-shadow: 0 0 0 3px rgba(168, 70, 50, 0.14);
+}
+
+.intro-story-panel {
+  color: var(--folio-text);
+}
+
+#intro-story-overlay,
+#demo-complete-overlay {
+  background:
+    repeating-linear-gradient(90deg, rgba(168, 70, 50, 0.08) 0 1px, transparent 1px 18px),
+    linear-gradient(135deg, var(--folio-paper), var(--folio-paper-2));
+}
+
+body:not(.light-theme) #intro-story-overlay,
+body:not(.light-theme) #demo-complete-overlay {
+  background:
+    repeating-linear-gradient(90deg, rgba(196, 90, 63, 0.08) 0 1px, transparent 1px 18px),
+    linear-gradient(135deg, #120f0d, #2a2119);
+}
+
+.intro-story-line,
+.demo-complete-text {
+  color: var(--folio-text);
+  text-shadow: none;
+}
+
+.intro-story-reward {
+  color: var(--folio-red);
+}
+
+.demo-complete-panel {
+  border: 1px solid var(--folio-line-strong);
+  border-radius: 3px;
+  background: var(--folio-panel);
+  box-shadow: var(--folio-shadow), var(--folio-soft-shadow);
+}
+
+.toast {
+  color: var(--folio-title);
+  border: 1px solid var(--folio-red);
+  border-radius: 2px;
+  background: var(--folio-panel-solid);
+  box-shadow: 6px 6px 0 rgba(35, 28, 24, 0.18);
+}
+
+body:not(.light-theme) .toast {
+  background: #19130f;
+}
+
+@media (max-width: 920px) {
+  #main-container {
+    align-items: center;
+    padding: 18px;
+  }
+
+  .title-wrapper {
+    width: min(560px, 100%);
+    padding: 38px 30px 36px 40px;
+    transform: none;
+  }
+
+  .title-wrapper::after {
+    right: 18px;
+    top: auto;
+    bottom: -18px;
+    width: 68%;
+    height: 34px;
+  }
+
+  #game-container,
+  #game-container.active {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: 12px;
+  }
+
+  #left-panel,
+  #right-panel {
+    width: 100%;
+    flex: none;
+  }
+
+  #right-panel {
+    display: flex;
+    flex-direction: column;
+  }
+
+  #tab-bar {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .tab-btn {
+    min-width: 86px;
+    text-align: center;
+  }
+}
+
+@media (max-width: 640px) {
+  .game-title {
+    font-size: 46px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+  }
+
+  .btn-start {
+    width: 100%;
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  .save-panel {
+    padding: 28px 18px 24px 26px;
+  }
+
+  #stats-row,
+  .explore-status,
+  .encounter-options {
+    grid-template-columns: 1fr;
+  }
+
+  .quick-btns,
+  .bottom-btns {
+    grid-template-columns: 1fr;
+  }
+
+  .dungeon-card:hover,
+  .item-card:hover,
+  .skill-card:hover,
+  .equip-card:hover,
+  .save-slot:hover,
+  .encounter-option:hover {
+    transform: none;
+  }
+}
+
+/* Light theme correction: less beige, more mineral field-note. */
+body.light-theme {
+  --folio-ink: #151813;
+  --folio-soot: #23251f;
+  --folio-paper: #d9dfd2;
+  --folio-paper-2: #c1cbbb;
+  --folio-panel: rgba(226, 229, 214, 0.9);
+  --folio-panel-solid: #e1e4d6;
+  --folio-card: rgba(246, 247, 232, 0.56);
+  --folio-line: rgba(31, 39, 31, 0.18);
+  --folio-line-strong: rgba(31, 39, 31, 0.44);
+  --folio-text: #22261e;
+  --folio-muted: #596153;
+  --folio-title: #151813;
+  --folio-red: #a43f35;
+  --folio-oxide: #2f6f68;
+  --folio-lichen: #657e39;
+  --folio-violet: #514255;
+  --folio-wash: rgba(164, 63, 53, 0.1);
+  --folio-shadow: 10px 10px 0 rgba(35, 38, 31, 0.12);
+  --folio-soft-shadow: 0 18px 40px rgba(35, 38, 31, 0.15);
+  --button-text: #f4f2e6;
+  color: var(--folio-text);
+  background:
+    repeating-linear-gradient(90deg, rgba(31, 39, 31, 0.045) 0 1px, transparent 1px 14px),
+    repeating-linear-gradient(0deg, rgba(31, 39, 31, 0.035) 0 1px, transparent 1px 18px),
+    linear-gradient(135deg, #d9dfd2 0%, #c4d0c1 47%, #e0dfcf 100%);
+}
+
+body.light-theme #main-container,
+body.light-theme #game-container {
+  background:
+    linear-gradient(90deg, rgba(164, 63, 53, 0.12) 0 10px, transparent 10px 100%),
+    repeating-linear-gradient(115deg, rgba(31, 39, 31, 0.035) 0 2px, transparent 2px 22px),
+    linear-gradient(135deg, #d9dfd2 0%, #c4d0c1 47%, #e0dfcf 100%);
+}
+
+body.light-theme .title-wrapper,
+body.light-theme .save-panel,
+body.light-theme #left-panel,
+body.light-theme #right-panel,
+body.light-theme .demo-complete-panel {
+  color: var(--folio-text);
+  border-color: var(--folio-line-strong);
+  background:
+    linear-gradient(90deg, var(--folio-wash) 0 9px, transparent 9px 100%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.3), transparent 46%),
+    var(--folio-panel);
+  box-shadow: var(--folio-shadow), var(--folio-soft-shadow);
+}
+
+body.light-theme .game-title,
+body.light-theme #realm-text,
+body.light-theme .save-title,
+body.light-theme .detail-title,
+body.light-theme .intro-story-title,
+body.light-theme .demo-complete-title {
+  color: var(--folio-title) !important;
+  text-shadow: 2px 2px 0 rgba(164, 63, 53, 0.16) !important;
+}
+
+body.light-theme .subtitle,
+body.light-theme .dungeon-name,
+body.light-theme .item-name,
+body.light-theme .skill-name,
+body.light-theme .equip-name,
+body.light-theme .encounter-title,
+body.light-theme .encounter-option-name,
+body.light-theme .achievement-title {
+  color: var(--folio-title) !important;
+}
+
+body.light-theme .stat-box,
+body.light-theme .cult-stat-row,
+body.light-theme .dungeon-card,
+body.light-theme .monster-row,
+body.light-theme .item-card,
+body.light-theme .skill-card,
+body.light-theme .equip-card,
+body.light-theme .challenge-result,
+body.light-theme .save-slot,
+body.light-theme .encounter-panel,
+body.light-theme .achievement-summary,
+body.light-theme .achievement-card,
+body.light-theme .encounter-option {
+  color: var(--folio-text);
+  border-color: var(--folio-line);
+  background:
+    linear-gradient(90deg, rgba(47, 111, 104, 0.12) 0 4px, transparent 4px 100%),
+    var(--folio-card);
+  box-shadow: none;
+}
+
+body.light-theme .tab-btn,
+body.light-theme .bottom-btn,
+body.light-theme .btn-back,
+body.light-theme .btn-back-dungeon,
+body.light-theme .btn-import,
+body.light-theme .btn-cultivate-skill,
+body.light-theme .btn-upgrade,
+body.light-theme .intro-story-btn {
+  color: var(--folio-text);
+  border-color: var(--folio-line);
+  background: transparent;
+}
+
+body.light-theme .tab-btn:hover,
+body.light-theme .bottom-btn:hover,
+body.light-theme .btn-back:hover,
+body.light-theme .btn-back-dungeon:hover,
+body.light-theme .btn-import:hover,
+body.light-theme .btn-cultivate-skill:hover,
+body.light-theme .btn-upgrade:hover,
+body.light-theme .intro-story-btn:hover {
+  color: var(--folio-title);
+  border-color: var(--folio-red);
+  background: rgba(164, 63, 53, 0.1);
+}
+
+body.light-theme .tab-btn.active {
+  color: var(--button-text);
+  border-color: var(--folio-red);
+  background:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.22), transparent 42%),
+    var(--folio-red);
+}
+
+body.light-theme #person-area,
+body.light-theme .explore-log,
+body.light-theme .alchemy-empty,
+body.light-theme .equip-empty,
+body.light-theme .tab-placeholder,
+body.light-theme #tab-bar {
+  border-color: var(--folio-line);
+  background:
+    repeating-linear-gradient(135deg, rgba(47, 111, 104, 0.08) 0 1px, transparent 1px 12px),
+    rgba(246, 247, 232, 0.3);
+}
+
+body.light-theme #intro-story-overlay,
+body.light-theme #demo-complete-overlay {
+  background:
+    repeating-linear-gradient(90deg, rgba(164, 63, 53, 0.08) 0 1px, transparent 1px 18px),
+    linear-gradient(135deg, #d9dfd2, #c1cbbb);
+}
+
+/* Project-bound character cutout tuning. */
+#person-area {
+  position: relative;
+  flex: 0 1 clamp(300px, 48vh, 430px);
+  min-height: 260px;
+  padding: clamp(12px, 2vw, 22px) 10px 8px;
+  overflow: hidden;
+  align-items: flex-end;
+  background:
+    repeating-linear-gradient(135deg, rgba(66, 110, 104, 0.055) 0 1px, transparent 1px 14px),
+    linear-gradient(180deg, transparent 0%, rgba(66, 110, 104, 0.08) 100%);
+}
+
+#person-area::after {
+  content: "";
+  position: absolute;
+  left: 13%;
+  right: 13%;
+  bottom: 11%;
+  height: 1px;
+  border-bottom: 1px dashed color-mix(in srgb, var(--folio-line-strong) 68%, transparent);
+  opacity: 0.72;
+  pointer-events: none;
+}
+
+#person-img {
+  position: relative;
+  z-index: 1;
+  width: min(92%, 380px);
+  max-height: 100%;
+  object-fit: contain;
+  opacity: 0.93;
+  filter:
+    saturate(0.78)
+    contrast(0.96)
+    sepia(0.14)
+    drop-shadow(0 18px 18px rgba(35, 38, 31, 0.12));
+}
+
+body:not(.light-theme) #person-area {
+  background:
+    repeating-linear-gradient(135deg, rgba(226, 204, 160, 0.032) 0 1px, transparent 1px 14px),
+    linear-gradient(180deg, transparent 0%, rgba(196, 90, 63, 0.055) 100%);
+}
+
+body:not(.light-theme) #person-img {
+  opacity: 0.88;
+  filter:
+    saturate(0.7)
+    contrast(0.92)
+    sepia(0.18)
+    brightness(0.92)
+    drop-shadow(0 18px 20px rgba(0, 0, 0, 0.24));
+}
+
+@media (max-width: 640px) {
+  #person-area {
+    flex-basis: 280px;
+    min-height: 240px;
+  }
+
+  #person-img {
+    width: min(94%, 330px);
+  }
+}
+
+/* Reduce repeated card density while keeping the mineral folio palette. */
+#stats-row {
+  gap: 0;
+  border-top: 1px solid var(--folio-line);
+  border-bottom: 1px solid var(--folio-line);
+}
+
+.stat-box {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.stat-box + .stat-box {
+  border-left: 1px solid var(--folio-line);
+}
+
+.cult-stat-row,
+.monster-row {
+  border-width: 0 0 1px;
+  border-color: var(--folio-line);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.cult-stat-row {
+  margin-bottom: 0;
+  padding: 13px 4px 13px 16px;
+}
+
+.monster-row {
+  padding: 10px 2px 10px 12px;
+}
+
+.dungeon-list,
+.monster-list,
+#alchemy-container,
+#skill-container,
+#equip-container,
+#achievement-container {
+  border-top: 1px solid var(--folio-line);
+}
+
+.dungeon-card,
+.item-card,
+.skill-card,
+.equip-card,
+.achievement-card {
+  margin-bottom: 0;
+  border-width: 0 0 1px;
+  border-color: var(--folio-line);
+  border-radius: 0;
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--folio-oxide) 12%, transparent) 0 3px, transparent 3px 100%);
+  box-shadow: none;
+}
+
+.dungeon-card {
+  padding: 15px 10px 15px 16px;
+}
+
+.item-card,
+.skill-card,
+.equip-card,
+.achievement-card {
+  padding: 15px 10px 15px 16px;
+}
+
+.dungeon-card:hover,
+.item-card:hover,
+.skill-card:hover,
+.equip-card:hover,
+.achievement-card:hover {
+  border-color: var(--folio-line-strong);
+  background:
+    linear-gradient(90deg, var(--folio-red) 0 3px, transparent 3px 100%),
+    color-mix(in srgb, var(--folio-red) 7%, transparent);
+  transform: none;
+  box-shadow: none;
+}
+
+.dungeon-card.locked:hover {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--folio-oxide) 12%, transparent) 0 3px, transparent 3px 100%);
+}
+
+.encounter-options {
+  gap: 0;
+  border-top: 1px solid var(--folio-line);
+}
+
+.encounter-option {
+  min-height: 0;
+  border-width: 0 0 1px;
+  border-color: var(--folio-line);
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.encounter-option + .encounter-option {
+  border-left: 1px solid var(--folio-line);
+}
+
+.encounter-option:hover {
+  border-color: var(--folio-line-strong);
+  background: color-mix(in srgb, var(--folio-red) 8%, transparent);
+  transform: none;
+  box-shadow: none;
+}
+
+.challenge-result,
+.achievement-summary,
+.encounter-panel {
+  box-shadow: none;
+}
+
+body.light-theme .stat-box,
+body.light-theme .cult-stat-row,
+body.light-theme .monster-row,
+body.light-theme .dungeon-card,
+body.light-theme .item-card,
+body.light-theme .skill-card,
+body.light-theme .equip-card,
+body.light-theme .achievement-card,
+body.light-theme .encounter-option {
+  border-color: var(--folio-line);
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--folio-oxide) 12%, transparent) 0 3px, transparent 3px 100%);
+  box-shadow: none;
+}
+
+body.light-theme .stat-box,
+body.light-theme .cult-stat-row,
+body.light-theme .monster-row,
+body.light-theme .encounter-option {
+  background: transparent;
+}
+
+body.light-theme .dungeon-card:hover,
+body.light-theme .item-card:hover,
+body.light-theme .skill-card:hover,
+body.light-theme .equip-card:hover,
+body.light-theme .achievement-card:hover,
+body.light-theme .encounter-option:hover {
+  border-color: var(--folio-line-strong);
+  background:
+    linear-gradient(90deg, var(--folio-red) 0 3px, transparent 3px 100%),
+    color-mix(in srgb, var(--folio-red) 7%, transparent);
+  box-shadow: none;
+}
