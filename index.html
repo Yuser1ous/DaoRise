@@ -114,7 +114,7 @@
       </div>
       <div class="stat-box">
         <div class="stat-box-label">血量</div>
-        <div class="stat-box-value" id="stat-hp" style="color:#8bc34a;">66</div>
+        <div class="stat-box-value" id="stat-hp" style="color:#8bc34a;">69</div>
       </div>
       <div class="stat-box">
         <div class="stat-box-label">灵石</div>
@@ -143,6 +143,7 @@
       <button class="tab-btn" data-tab="skill">功 法</button>
       <button class="tab-btn" data-tab="equip">装 备</button>
       <button class="tab-btn" data-tab="challenge">挑 战</button>
+      <button class="tab-btn" data-tab="achievement">成 就</button>
     </div>
     <div id="tab-content">
       <div class="tab-panel active" id="tab-cultivate">
@@ -173,16 +174,16 @@
         </div>
         <div class="cult-divider"></div>
         <div class="cult-formula">
-          攻击 = <span id="formula-atk">6</span> × (1+阶数×0.22) × √资质 × 功法倍率 × 战斗倍率(装)
+          攻击 = <span id="formula-atk">6</span> × (1+阶数×0.18) × √资质 × 功法倍率 × 战斗倍率(装)
         </div>
         <div class="cult-formula">
-          血量 = <span id="formula-hp">60</span> × (1+阶数×0.22) × √资质 × 功法倍率 × 战斗倍率(装)
+          血量 = <span id="formula-hp">64</span> × (1+阶数×0.18) × √资质 × 功法倍率 × 战斗倍率(装)
         </div>
         <div class="cult-formula">
-          灵力获取 = <span id="formula-gain">1</span> × (1+阶数×0.16) × 资质 × 功法倍率 × 修炼倍率(装)
+          灵力获取 = <span id="formula-gain">1</span> × (1+阶数×0.14) × 资质 × 功法倍率 × 修炼倍率(装)
         </div>
         <div class="cult-formula">
-          功法修炼XP = (12+境界×8+阶数×3) × √资质
+          功法修炼XP = (10+境界×7+阶数×3) × √资质
         </div>
       </div>
       <div class="tab-panel" id="tab-dungeon">
@@ -199,6 +200,9 @@
             <div class="detail-section-title">怪物列表</div>
             <div class="monster-list" id="monster-list"></div>
             <button class="btn-explore" id="btn-explore" onclick="startExplore()">开 始 游 历</button>
+            <div class="detail-section-title" id="log-title" style="display:none;">探索记录</div>
+            <div class="explore-log" id="explore-log"></div>
+            <div class="encounter-panel" id="encounter-panel" style="display:none;"></div>
             <div class="explore-status" id="explore-status" style="display:none;">
               <div class="explore-status-item">
                 <span>血量</span>
@@ -217,8 +221,6 @@
                 <strong id="explore-status-loot">暂无</strong>
               </div>
             </div>
-            <div class="detail-section-title" id="log-title" style="display:none;">探索记录</div>
-            <div class="explore-log" id="explore-log"></div>
           </div>
         </div>
       </div>
@@ -254,6 +256,11 @@
             <div class="explore-log" id="challenge-log"></div>
             <div id="challenge-result-area"></div>
           </div>
+        </div>
+      </div>
+      <div class="tab-panel" id="tab-achievement">
+        <div id="achievement-container">
+          <div class="alchemy-empty">暂无成就</div>
         </div>
       </div>
     </div>

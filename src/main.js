@@ -1,47 +1,47 @@
 var REALMS = [
   {
     name: '凡人',
-    costs: [12, 30, 75, 180, 420, 950, 2100, 4600, 9800]
+    costs: [15, 36, 85, 190, 430, 960, 2100, 4600, 9800]
   },
   {
     name: '练气',
-    costs: [12000, 28000, 65000, 150000, 340000, 760000, 1700000, 3800000, 8500000]
+    costs: [6500, 14000, 30000, 65000, 140000, 300000, 640000, 1360000, 2900000]
   },
   {
     name: '筑基',
-    costs: [2500000, 5600000, 12500000, 28000000, 62000000, 138000000, 305000000, 675000000, 1500000000]
+    costs: [420000, 900000, 1900000, 4000000, 8500000, 18000000, 38000000, 80000000, 168000000]
   },
   {
     name: '金丹',
-    costs: [420000000, 950000000, 2100000000, 4700000000, 10500000000, 23500000000, 52500000000, 118000000000, 265000000000]
+    costs: [52000000, 110000000, 235000000, 500000000, 1060000000, 2250000000, 4800000000, 10200000000, 21600000000]
   },
   {
     name: '元婴',
-    costs: [80000000000, 180000000000, 410000000000, 920000000000, 2100000000000, 4700000000000, 10600000000000, 23800000000000, 53500000000000]
+    costs: [6500000000, 14000000000, 30000000000, 64000000000, 136000000000, 290000000000, 620000000000, 1320000000000, 2800000000000]
   },
   {
     name: '化神',
-    costs: [16000000000000, 36000000000000, 81000000000000, 182000000000000, 410000000000000, 920000000000000, 2070000000000000, 4660000000000000, 10500000000000000]
+    costs: [820000000000, 1760000000000, 3760000000000, 8000000000000, 17000000000000, 36000000000000, 77000000000000, 164000000000000, 350000000000000]
   },
   {
     name: '合体',
-    costs: [3200000000000000, 7200000000000000, 16200000000000000, 36500000000000000, 82000000000000000, 185000000000000000, 416000000000000000, 936000000000000000, 2100000000000000000]
+    costs: [105000000000000, 225000000000000, 480000000000000, 1020000000000000, 2160000000000000, 4600000000000000, 9800000000000000, 20800000000000000, 44200000000000000]
   },
   {
     name: '渡劫',
-    costs: [640000000000000000, 1440000000000000000, 3240000000000000000, 7300000000000000000, 16400000000000000000, 36900000000000000000, 83000000000000000000, 187000000000000000000, 420000000000000000000]
+    costs: [13500000000000000, 29000000000000000, 62000000000000000, 132000000000000000, 280000000000000000, 596000000000000000, 1270000000000000000, 2700000000000000000, 5750000000000000000]
   },
   {
     name: '大乘',
-    costs: [128000000000000000000, 288000000000000000000, 648000000000000000000, 1460000000000000000000, 3280000000000000000000, 7380000000000000000000, 16600000000000000000000, 37400000000000000000000, 84000000000000000000000]
+    costs: [1750000000000000000, 3750000000000000000, 8000000000000000000, 17000000000000000000, 36200000000000000000, 77000000000000000000, 164000000000000000000, 349000000000000000000, 742000000000000000000]
   },
   {
     name: '羽化',
-    costs: [25600000000000000000000, 57600000000000000000000, 130000000000000000000000, 292000000000000000000000, 657000000000000000000000, 1480000000000000000000000, 3330000000000000000000000, 7490000000000000000000000, 16800000000000000000000000]
+    costs: [230000000000000000000, 492000000000000000000, 1050000000000000000000, 2230000000000000000000, 4740000000000000000000, 10100000000000000000000, 21500000000000000000000, 45700000000000000000000, 97200000000000000000000]
   },
   {
     name: '仙',
-    costs: [5120000000000000000000000, 11500000000000000000000000, 25900000000000000000000000, 58300000000000000000000000, 131000000000000000000000000, 295000000000000000000000000, 664000000000000000000000000, 1490000000000000000000000000, 3350000000000000000000000000]
+    costs: [30000000000000000000000, 64000000000000000000000, 136000000000000000000000, 290000000000000000000000, 617000000000000000000000, 1310000000000000000000000, 2790000000000000000000000, 5930000000000000000000000, 12600000000000000000000000]
   }
 ];
 
@@ -55,6 +55,14 @@ var gameState = {
   spiritStones: 0,
   inventory: {},
   completedChallenges: [],
+  achievements: {},
+  stats: {
+    exploreRuns: 0,
+    encounters: 0,
+    adventureChoices: 0,
+    itemsUsed: 0
+  },
+  pendingEncounter: null,
   introSeen: false,
   demoCompleteSeen: false,
   skills: {
@@ -78,28 +86,28 @@ var currentSlot = 0;
 var autoSaveInterval = null;
 
 var BALANCE = {
-  battleStageBonus: 0.22,
-  cultivateStageBonus: 0.16,
-  skillXpBase: 12,
-  skillXpRealmBonus: 8,
+  battleStageBonus: 0.18,
+  cultivateStageBonus: 0.14,
+  skillXpBase: 10,
+  skillXpRealmBonus: 7,
   skillXpStageBonus: 3,
-  exploreRecoveryRate: 0.42,
-  exploreTurnLimit: 120,
-  challengeTurnLimit: 240,
-  skillCultivateMs: 550,
-  exploreStartDelayMs: 350,
-  exploreStepDelayMs: 450,
-  exploreTickMinMs: 3000,
-  exploreTickMaxMs: 5000,
-  exploreLogLimit: 80,
+  exploreRecoveryRate: 0.34,
+  exploreTurnLimit: 80,
+  challengeTurnLimit: 160,
+  skillCultivateMs: 500,
+  exploreStartDelayMs: 400,
+  exploreStepDelayMs: 500,
+  exploreTickMinMs: 1100,
+  exploreTickMaxMs: 1700,
+  exploreLogLimit: 90,
   cultivateTickMs: 1000
 };
 
-var baseGains = [1, 9, 72, 560, 4300, 33000, 250000, 1900000, 14500000, 110000000, 830000000];
+var baseGains = [1, 18, 320, 4800, 70000, 1000000, 14000000, 190000000, 2600000000, 35000000000, 470000000000];
 
-var baseHPs = [60, 360, 2200, 14000, 90000, 580000, 3800000, 25000000, 165000000, 1100000000, 7400000000];
+var baseHPs = [64, 420, 2800, 22000, 175000, 1400000, 11200000, 90000000, 720000000, 5800000000, 46500000000];
 
-var baseATKs = [6, 36, 220, 1400, 9000, 58000, 380000, 2500000, 16500000, 110000000, 740000000];
+var baseATKs = [6, 42, 280, 2200, 17500, 140000, 1120000, 9000000, 72000000, 580000000, 4650000000];
 
 function getSkillMultiplier() {
   var bonus = 0;
@@ -133,9 +141,9 @@ var DUNGEONS = [
     requireRealm: 0,
     requireStage: 0,
     monsters: [
-      { name: '小草精(小)', hp: 14, atk: 1, stones: 6, drops: [{ id: 'lingli_dan_1', name: '一级灵力丹', count: 1, rate: 1.0 }] },
-      { name: '小草精(中)', hp: 26, atk: 2, stones: 10, drops: [{ id: 'lingli_dan_1', name: '一级灵力丹', count: 1, rate: 1.0 }] },
-      { name: '小草精(大)', hp: 46, atk: 4, stones: 18, drops: [{ id: 'lingli_dan_1', name: '一级灵力丹', count: 2, rate: 1.0 }] }
+      { name: '小草精(小)', hp: 12, atk: 1, stones: 5, drops: [{ id: 'lingli_dan_1', name: '一级灵力丹', count: 1, rate: 1.0 }] },
+      { name: '小草精(中)', hp: 24, atk: 2, stones: 9, drops: [{ id: 'lingli_dan_1', name: '一级灵力丹', count: 1, rate: 1.0 }] },
+      { name: '小草精(大)', hp: 42, atk: 4, stones: 16, drops: [{ id: 'lingli_dan_1', name: '一级灵力丹', count: 2, rate: 1.0 }] }
     ]
   },
   {
@@ -146,9 +154,9 @@ var DUNGEONS = [
     requireRealm: 0,
     requireStage: 4,
     monsters: [
-      { name: '玄蛇', hp: 85, atk: 10, stones: 24, drops: [{ id: 'lingli_dan_2', name: '二级灵力丹', count: 1, rate: 1.0 }, { id: 'aptitude_dan_1', name: '劣等资质丹', count: 1, rate: 1.0 }] },
-      { name: '瘴蟾', hp: 130, atk: 16, stones: 40, drops: [{ id: 'lingli_dan_2', name: '二级灵力丹', count: 2, rate: 1.0 }, { id: 'aptitude_dan_2', name: '低等资质丹', count: 1, rate: 0.55 }] },
-      { name: '树妖', hp: 190, atk: 22, stones: 68, drops: [{ id: 'lingli_dan_2', name: '二级灵力丹', count: 3, rate: 1.0 }, { id: 'aptitude_dan_2', name: '低等资质丹', count: 1, rate: 0.65 }] }
+      { name: '玄蛇', hp: 75, atk: 8, stones: 22, drops: [{ id: 'lingli_dan_2', name: '二级灵力丹', count: 1, rate: 1.0 }, { id: 'aptitude_dan_1', name: '劣等资质丹', count: 1, rate: 0.60 }] },
+      { name: '瘴蟾', hp: 120, atk: 13, stones: 36, drops: [{ id: 'lingli_dan_2', name: '二级灵力丹', count: 2, rate: 1.0 }, { id: 'aptitude_dan_2', name: '低等资质丹', count: 1, rate: 0.32 }] },
+      { name: '树妖', hp: 180, atk: 18, stones: 58, drops: [{ id: 'lingli_dan_2', name: '二级灵力丹', count: 2, rate: 1.0 }, { id: 'aptitude_dan_2', name: '低等资质丹', count: 1, rate: 0.40 }] }
     ]
   },
   {
@@ -159,9 +167,9 @@ var DUNGEONS = [
     requireRealm: 0,
     requireStage: 7,
     monsters: [
-      { name: '雾隐狐', hp: 240, atk: 34, stones: 90, drops: [{ id: 'lingli_dan_2', name: '二级灵力丹', count: 2, rate: 1.0 }, { id: 'aptitude_dan_2', name: '低等资质丹', count: 1, rate: 0.70 }] },
-      { name: '藤甲树卫', hp: 380, atk: 52, stones: 140, drops: [{ id: 'lingli_dan_2', name: '二级灵力丹', count: 4, rate: 1.0 }, { id: 'aptitude_dan_2', name: '低等资质丹', count: 2, rate: 0.55 }] },
-      { name: '古木灵魈', hp: 620, atk: 76, stones: 220, drops: [{ id: 'lingli_dan_3', name: '三级灵力丹', count: 1, rate: 0.70 }, { id: 'aptitude_dan_3', name: '中等资质丹', count: 1, rate: 0.30 }] }
+      { name: '雾隐狐', hp: 210, atk: 26, stones: 76, drops: [{ id: 'lingli_dan_2', name: '二级灵力丹', count: 2, rate: 1.0 }, { id: 'aptitude_dan_2', name: '低等资质丹', count: 1, rate: 0.45 }] },
+      { name: '藤甲树卫', hp: 330, atk: 38, stones: 116, drops: [{ id: 'lingli_dan_2', name: '二级灵力丹', count: 3, rate: 1.0 }, { id: 'aptitude_dan_2', name: '低等资质丹', count: 2, rate: 0.38 }] },
+      { name: '古木灵魈', hp: 520, atk: 56, stones: 180, drops: [{ id: 'lingli_dan_3', name: '三级灵力丹', count: 1, rate: 0.55 }, { id: 'aptitude_dan_3', name: '中等资质丹', count: 1, rate: 0.22 }] }
     ]
   },
   {
@@ -172,9 +180,9 @@ var DUNGEONS = [
     requireRealm: 1,
     requireStage: 0,
     monsters: [
-      { name: '石甲虫', hp: 360, atk: 42, stones: 90, drops: [{ id: 'lingli_dan_3', name: '三级灵力丹', count: 1, rate: 1.0 }, { id: 'aptitude_dan_2', name: '低等资质丹', count: 1, rate: 0.90 }] },
-      { name: '暗纹蟒', hp: 580, atk: 65, stones: 150, drops: [{ id: 'lingli_dan_3', name: '三级灵力丹', count: 2, rate: 1.0 }, { id: 'aptitude_dan_3', name: '中等资质丹', count: 1, rate: 0.55 }] },
-      { name: '地穴蛛母', hp: 920, atk: 95, stones: 240, drops: [{ id: 'lingli_dan_3', name: '三级灵力丹', count: 3, rate: 1.0 }, { id: 'aptitude_dan_3', name: '中等资质丹', count: 1, rate: 0.65 }] }
+      { name: '石甲虫', hp: 390, atk: 38, stones: 120, drops: [{ id: 'lingli_dan_3', name: '三级灵力丹', count: 1, rate: 1.0 }, { id: 'aptitude_dan_2', name: '低等资质丹', count: 1, rate: 0.55 }] },
+      { name: '暗纹蟒', hp: 640, atk: 58, stones: 190, drops: [{ id: 'lingli_dan_3', name: '三级灵力丹', count: 2, rate: 1.0 }, { id: 'aptitude_dan_3', name: '中等资质丹', count: 1, rate: 0.34 }] },
+      { name: '地穴蛛母', hp: 980, atk: 84, stones: 300, drops: [{ id: 'lingli_dan_3', name: '三级灵力丹', count: 3, rate: 1.0 }, { id: 'aptitude_dan_3', name: '中等资质丹', count: 1, rate: 0.42 }] }
     ]
   },
   {
@@ -185,9 +193,9 @@ var DUNGEONS = [
     requireRealm: 1,
     requireStage: 2,
     monsters: [
-      { name: '幽光岩蜥', hp: 780, atk: 130, stones: 210, drops: [{ id: 'lingli_dan_3', name: '三级灵力丹', count: 2, rate: 1.0 }, { id: 'aptitude_dan_3', name: '中等资质丹', count: 1, rate: 0.50 }] },
-      { name: '裂骨蝎', hp: 1250, atk: 190, stones: 330, drops: [{ id: 'lingli_dan_3', name: '三级灵力丹', count: 3, rate: 1.0 }, { id: 'aptitude_dan_3', name: '中等资质丹', count: 1, rate: 0.62 }] },
-      { name: '地脉蛮蜥', hp: 2050, atk: 280, stones: 520, drops: [{ id: 'lingli_dan_4', name: '四级灵力丹', count: 1, rate: 0.60 }, { id: 'aptitude_dan_3', name: '中等资质丹', count: 2, rate: 0.50 }] }
+      { name: '幽光岩蜥', hp: 960, atk: 115, stones: 260, drops: [{ id: 'lingli_dan_3', name: '三级灵力丹', count: 2, rate: 1.0 }, { id: 'aptitude_dan_3', name: '中等资质丹', count: 1, rate: 0.32 }] },
+      { name: '裂骨蝎', hp: 1500, atk: 165, stones: 410, drops: [{ id: 'lingli_dan_3', name: '三级灵力丹', count: 3, rate: 1.0 }, { id: 'aptitude_dan_3', name: '中等资质丹', count: 1, rate: 0.38 }] },
+      { name: '地脉蛮蜥', hp: 2300, atk: 240, stones: 640, drops: [{ id: 'lingli_dan_4', name: '四级灵力丹', count: 1, rate: 0.55 }, { id: 'aptitude_dan_3', name: '中等资质丹', count: 2, rate: 0.32 }] }
     ]
   },
   {
@@ -198,9 +206,9 @@ var DUNGEONS = [
     requireRealm: 1,
     requireStage: 4,
     monsters: [
-      { name: '熔岩甲虫', hp: 3100, atk: 520, stones: 700, drops: [{ id: 'lingli_dan_4', name: '四级灵力丹', count: 2, rate: 1.0 }, { id: 'aptitude_dan_4', name: '高等资质丹', count: 1, rate: 0.55 }] },
-      { name: '地心炎蟒', hp: 5200, atk: 760, stones: 1100, drops: [{ id: 'lingli_dan_4', name: '四级灵力丹', count: 3, rate: 1.0 }, { id: 'aptitude_dan_4', name: '高等资质丹', count: 1, rate: 0.65 }] },
-      { name: '煞晶蛛后', hp: 8500, atk: 1100, stones: 1750, drops: [{ id: 'lingli_dan_4', name: '四级灵力丹', count: 4, rate: 1.0 }, { id: 'aptitude_dan_4', name: '高等资质丹', count: 2, rate: 0.55 }] }
+      { name: '熔岩甲虫', hp: 3000, atk: 430, stones: 820, drops: [{ id: 'lingli_dan_4', name: '四级灵力丹', count: 2, rate: 1.0 }, { id: 'aptitude_dan_4', name: '高等资质丹', count: 1, rate: 0.36 }] },
+      { name: '地心炎蟒', hp: 4800, atk: 620, stones: 1280, drops: [{ id: 'lingli_dan_4', name: '四级灵力丹', count: 3, rate: 1.0 }, { id: 'aptitude_dan_4', name: '高等资质丹', count: 1, rate: 0.42 }] },
+      { name: '煞晶蛛后', hp: 7600, atk: 900, stones: 2000, drops: [{ id: 'lingli_dan_4', name: '四级灵力丹', count: 4, rate: 1.0 }, { id: 'aptitude_dan_4', name: '高等资质丹', count: 2, rate: 0.36 }] }
     ]
   },
   {
@@ -211,9 +219,9 @@ var DUNGEONS = [
     requireRealm: 1,
     requireStage: 7,
     monsters: [
-      { name: '煞纹岩傀', hp: 7800, atk: 1250, stones: 1400, drops: [{ id: 'lingli_dan_4', name: '四级灵力丹', count: 3, rate: 1.0 }, { id: 'aptitude_dan_4', name: '高等资质丹', count: 1, rate: 0.62 }] },
-      { name: '地脉炎蛟', hp: 12500, atk: 1800, stones: 2200, drops: [{ id: 'lingli_dan_4', name: '四级灵力丹', count: 5, rate: 1.0 }, { id: 'aptitude_dan_4', name: '高等资质丹', count: 2, rate: 0.55 }] },
-      { name: '幽煞晶王', hp: 20500, atk: 2600, stones: 3500, drops: [{ id: 'lingli_dan_5', name: '五级灵力丹', count: 1, rate: 0.50 }, { id: 'aptitude_dan_5', name: '极品资质丹', count: 1, rate: 0.22 }] }
+      { name: '煞纹岩傀', hp: 7000, atk: 1050, stones: 1600, drops: [{ id: 'lingli_dan_4', name: '四级灵力丹', count: 3, rate: 1.0 }, { id: 'aptitude_dan_4', name: '高等资质丹', count: 1, rate: 0.40 }] },
+      { name: '地脉炎蛟', hp: 11000, atk: 1550, stones: 2500, drops: [{ id: 'lingli_dan_4', name: '四级灵力丹', count: 4, rate: 1.0 }, { id: 'aptitude_dan_4', name: '高等资质丹', count: 2, rate: 0.36 }] },
+      { name: '幽煞晶王', hp: 17500, atk: 2250, stones: 3900, drops: [{ id: 'lingli_dan_5', name: '五级灵力丹', count: 1, rate: 0.45 }, { id: 'aptitude_dan_5', name: '极品资质丹', count: 1, rate: 0.16 }] }
     ]
   },
   {
@@ -224,9 +232,9 @@ var DUNGEONS = [
     requireRealm: 2,
     requireStage: 0,
     monsters: [
-      { name: '晶甲蜥', hp: 9000, atk: 1500, stones: 1000, drops: [{ id: 'lingli_dan_5', name: '五级灵力丹', count: 1, rate: 1.0 }, { id: 'aptitude_dan_4', name: '高等资质丹', count: 2, rate: 0.70 }] },
-      { name: '矿脉蟒', hp: 15000, atk: 2200, stones: 1600, drops: [{ id: 'lingli_dan_5', name: '五级灵力丹', count: 2, rate: 1.0 }, { id: 'aptitude_dan_5', name: '极品资质丹', count: 1, rate: 0.45 }] },
-      { name: '钻山兽', hp: 25000, atk: 3200, stones: 2600, drops: [{ id: 'lingli_dan_5', name: '五级灵力丹', count: 3, rate: 1.0 }, { id: 'aptitude_dan_5', name: '极品资质丹', count: 1, rate: 0.52 }] }
+      { name: '晶甲蜥', hp: 11000, atk: 1250, stones: 1600, drops: [{ id: 'lingli_dan_5', name: '五级灵力丹', count: 1, rate: 1.0 }, { id: 'aptitude_dan_4', name: '高等资质丹', count: 2, rate: 0.44 }] },
+      { name: '矿脉蟒', hp: 18000, atk: 1800, stones: 2500, drops: [{ id: 'lingli_dan_5', name: '五级灵力丹', count: 2, rate: 1.0 }, { id: 'aptitude_dan_5', name: '极品资质丹', count: 1, rate: 0.24 }] },
+      { name: '钻山兽', hp: 30000, atk: 2600, stones: 4000, drops: [{ id: 'lingli_dan_5', name: '五级灵力丹', count: 3, rate: 1.0 }, { id: 'aptitude_dan_5', name: '极品资质丹', count: 1, rate: 0.28 }] }
     ]
   },
   {
@@ -237,9 +245,9 @@ var DUNGEONS = [
     requireRealm: 2,
     requireStage: 2,
     monsters: [
-      { name: '矿髓甲虫', hp: 22000, atk: 3800, stones: 2800, drops: [{ id: 'lingli_dan_5', name: '五级灵力丹', count: 2, rate: 1.0 }, { id: 'aptitude_dan_5', name: '极品资质丹', count: 1, rate: 0.50 }] },
-      { name: '晶背岩蟒', hp: 36000, atk: 5400, stones: 4400, drops: [{ id: 'lingli_dan_5', name: '五级灵力丹', count: 4, rate: 1.0 }, { id: 'aptitude_dan_5', name: '极品资质丹', count: 1, rate: 0.65 }] },
-      { name: '吞矿巨兽', hp: 60000, atk: 7800, stones: 7000, drops: [{ id: 'lingli_dan_6', name: '六级灵力丹', count: 1, rate: 0.45 }, { id: 'aptitude_dan_5', name: '极品资质丹', count: 2, rate: 0.45 }] }
+      { name: '矿髓甲虫', hp: 26000, atk: 3100, stones: 4200, drops: [{ id: 'lingli_dan_5', name: '五级灵力丹', count: 2, rate: 1.0 }, { id: 'aptitude_dan_5', name: '极品资质丹', count: 1, rate: 0.30 }] },
+      { name: '晶背岩蟒', hp: 42000, atk: 4400, stones: 6500, drops: [{ id: 'lingli_dan_5', name: '五级灵力丹', count: 3, rate: 1.0 }, { id: 'aptitude_dan_5', name: '极品资质丹', count: 1, rate: 0.36 }] },
+      { name: '吞矿巨兽', hp: 68000, atk: 6200, stones: 9800, drops: [{ id: 'lingli_dan_6', name: '六级灵力丹', count: 1, rate: 0.42 }, { id: 'aptitude_dan_5', name: '极品资质丹', count: 2, rate: 0.28 }] }
     ]
   },
   {
@@ -250,9 +258,9 @@ var DUNGEONS = [
     requireRealm: 2,
     requireStage: 5,
     monsters: [
-      { name: '煞气蝠妖', hp: 80000, atk: 14000, stones: 7500, drops: [{ id: 'lingli_dan_6', name: '六级灵力丹', count: 1, rate: 1.0 }, { id: 'aptitude_dan_5', name: '极品资质丹', count: 2, rate: 0.55 }] },
-      { name: '深渊蠕虫', hp: 130000, atk: 20000, stones: 11500, drops: [{ id: 'lingli_dan_6', name: '六级灵力丹', count: 2, rate: 1.0 }, { id: 'aptitude_dan_6', name: '天品资质丹', count: 1, rate: 0.40 }] },
-      { name: '煞晶古魔', hp: 220000, atk: 29000, stones: 18000, drops: [{ id: 'lingli_dan_6', name: '六级灵力丹', count: 3, rate: 1.0 }, { id: 'aptitude_dan_6', name: '天品资质丹', count: 1, rate: 0.46 }] }
+      { name: '煞气蝠妖', hp: 72000, atk: 10500, stones: 10500, drops: [{ id: 'lingli_dan_6', name: '六级灵力丹', count: 1, rate: 1.0 }, { id: 'aptitude_dan_5', name: '极品资质丹', count: 2, rate: 0.34 }] },
+      { name: '深渊蠕虫', hp: 116000, atk: 15000, stones: 16000, drops: [{ id: 'lingli_dan_6', name: '六级灵力丹', count: 2, rate: 1.0 }, { id: 'aptitude_dan_6', name: '天品资质丹', count: 1, rate: 0.22 }] },
+      { name: '煞晶古魔', hp: 190000, atk: 21500, stones: 24500, drops: [{ id: 'lingli_dan_6', name: '六级灵力丹', count: 3, rate: 1.0 }, { id: 'aptitude_dan_6', name: '天品资质丹', count: 1, rate: 0.26 }] }
     ]
   },
   {
@@ -263,26 +271,26 @@ var DUNGEONS = [
     requireRealm: 2,
     requireStage: 7,
     monsters: [
-      { name: '黑雾煞灵', hp: 220000, atk: 36000, stones: 20000, drops: [{ id: 'lingli_dan_6', name: '六级灵力丹', count: 2, rate: 1.0 }, { id: 'aptitude_dan_6', name: '天品资质丹', count: 1, rate: 0.45 }] },
-      { name: '裂魂古魔', hp: 360000, atk: 52000, stones: 32000, drops: [{ id: 'lingli_dan_6', name: '六级灵力丹', count: 4, rate: 1.0 }, { id: 'aptitude_dan_6', name: '天品资质丹', count: 1, rate: 0.60 }] },
-      { name: '煞渊魔主', hp: 600000, atk: 76000, stones: 50000, drops: [{ id: 'lingli_dan_6', name: '六级灵力丹', count: 6, rate: 1.0 }, { id: 'aptitude_dan_6', name: '天品资质丹', count: 2, rate: 0.48 }] }
+      { name: '黑雾煞灵', hp: 170000, atk: 26000, stones: 28000, drops: [{ id: 'lingli_dan_6', name: '六级灵力丹', count: 2, rate: 1.0 }, { id: 'aptitude_dan_6', name: '天品资质丹', count: 1, rate: 0.28 }] },
+      { name: '裂魂古魔', hp: 280000, atk: 38000, stones: 43000, drops: [{ id: 'lingli_dan_6', name: '六级灵力丹', count: 4, rate: 1.0 }, { id: 'aptitude_dan_6', name: '天品资质丹', count: 1, rate: 0.34 }] },
+      { name: '煞渊魔主', hp: 460000, atk: 56000, stones: 66000, drops: [{ id: 'lingli_dan_6', name: '六级灵力丹', count: 5, rate: 1.0 }, { id: 'aptitude_dan_6', name: '天品资质丹', count: 2, rate: 0.30 }] }
     ]
   }
 ];
 
 var ITEMS = {
-  lingli_dan_1: { name: '一级灵力丹', icon: '💊', effect: '使用后获得 18 点灵力', type: 'power', value: 18 },
-  lingli_dan_2: { name: '二级灵力丹', icon: '💊', effect: '使用后获得 120 点灵力', type: 'power', value: 120 },
-  lingli_dan_3: { name: '三级灵力丹', icon: '💊', effect: '使用后获得 850 点灵力', type: 'power', value: 850 },
-  lingli_dan_4: { name: '四级灵力丹', icon: '💊', effect: '使用后获得 6000 点灵力', type: 'power', value: 6000 },
-  lingli_dan_5: { name: '五级灵力丹', icon: '💊', effect: '使用后获得 42000 点灵力', type: 'power', value: 42000 },
-  lingli_dan_6: { name: '六级灵力丹', icon: '💊', effect: '使用后获得 300000 点灵力', type: 'power', value: 300000 },
-  aptitude_dan_1: { name: '劣等资质丹', icon: '💠', effect: '使用后资质 +0.02', type: 'aptitude', value: 0.02 },
-  aptitude_dan_2: { name: '低等资质丹', icon: '💠', effect: '使用后资质 +0.06', type: 'aptitude', value: 0.06 },
-  aptitude_dan_3: { name: '中等资质丹', icon: '💠', effect: '使用后资质 +0.16', type: 'aptitude', value: 0.16 },
-  aptitude_dan_4: { name: '高等资质丹', icon: '💠', effect: '使用后资质 +0.40', type: 'aptitude', value: 0.40 },
-  aptitude_dan_5: { name: '极品资质丹', icon: '💠', effect: '使用后资质 +0.95', type: 'aptitude', value: 0.95 },
-  aptitude_dan_6: { name: '天品资质丹', icon: '💠', effect: '使用后资质 +2.20', type: 'aptitude', value: 2.20 }
+  lingli_dan_1: { name: '一级灵力丹', icon: '💊', effect: '使用后获得 22 点灵力', type: 'power', value: 22 },
+  lingli_dan_2: { name: '二级灵力丹', icon: '💊', effect: '使用后获得 160 点灵力', type: 'power', value: 160 },
+  lingli_dan_3: { name: '三级灵力丹', icon: '💊', effect: '使用后获得 1100 点灵力', type: 'power', value: 1100 },
+  lingli_dan_4: { name: '四级灵力丹', icon: '💊', effect: '使用后获得 7200 点灵力', type: 'power', value: 7200 },
+  lingli_dan_5: { name: '五级灵力丹', icon: '💊', effect: '使用后获得 46000 点灵力', type: 'power', value: 46000 },
+  lingli_dan_6: { name: '六级灵力丹', icon: '💊', effect: '使用后获得 290000 点灵力', type: 'power', value: 290000 },
+  aptitude_dan_1: { name: '劣等资质丹', icon: '💠', effect: '使用后资质 +0.03', type: 'aptitude', value: 0.03 },
+  aptitude_dan_2: { name: '低等资质丹', icon: '💠', effect: '使用后资质 +0.07', type: 'aptitude', value: 0.07 },
+  aptitude_dan_3: { name: '中等资质丹', icon: '💠', effect: '使用后资质 +0.13', type: 'aptitude', value: 0.13 },
+  aptitude_dan_4: { name: '高等资质丹', icon: '💠', effect: '使用后资质 +0.23', type: 'aptitude', value: 0.23 },
+  aptitude_dan_5: { name: '极品资质丹', icon: '💠', effect: '使用后资质 +0.38', type: 'aptitude', value: 0.38 },
+  aptitude_dan_6: { name: '天品资质丹', icon: '💠', effect: '使用后资质 +0.60', type: 'aptitude', value: 0.60 }
 };
 
 var CHALLENGES = [
@@ -293,8 +301,8 @@ var CHALLENGES = [
     icon: '🐅',
     requireRealm: 0,
     requireStage: 3,
-    monster: { name: '虎妖王', hp: 110, atk: 14 },
-    rewardAptitude: 0.35,
+    monster: { name: '虎妖王', hp: 90, atk: 10 },
+    rewardAptitude: 0.22,
     rewardEquip: 'xuantiejian',
     winMsg: '虎妖王轰然倒下，妖气四散。在它巢穴深处，你发现了一柄插在石中的古剑——玄铁剑。剑身虽暗，却透着凛凛寒光。你握住剑柄的瞬间，仿佛听到一声低沉的剑鸣。从此以后，你不再手无寸铁。',
     loseMsg: '虎妖王一掌将你拍飞——它的力量远超你的预料。回山修炼，待你修为精进，再来斩妖除害！'
@@ -306,8 +314,8 @@ var CHALLENGES = [
     icon: '⚡',
     requireRealm: 0,
     requireStage: 8,
-    monster: { name: '问心石', hp: 360, atk: 48 },
-    rewardAptitude: 1.0,
+    monster: { name: '问心石', hp: 280, atk: 26 },
+    rewardAptitude: 0.55,
     rewardSkill: 'lianqi_jue',
     rewardEquip: 'lingxinyu',
     winMsg: '我看到了你的决心！修仙的道路为你敞开……问心石碎开的瞬间，一块温润的灵玉从中浮现——灵心玉。它静静地躺在你掌心，温暖如心火。你将带着这份信念与力量，走向更广阔的天地。',
@@ -320,8 +328,8 @@ var CHALLENGES = [
     icon: '⏳',
     requireRealm: 1,
     requireStage: 3,
-    monster: { name: '时之残像', hp: 2800, atk: 380 },
-    rewardAptitude: 2.8,
+    monster: { name: '时之残像', hp: 1800, atk: 180 },
+    rewardAptitude: 1.0,
     rewardEquip: 'shisha_xianglian',
     winMsg: '残像在最后一击下消散为漫天星砂。裂隙开始闭合，但那些星砂没有散尽——它们汇聚到一起，在你颈间凝成了一条项链。每一粒砂砾都封存着一瞬永恒。你感到周身时光流速悄然改变，攻守间皆有岁月之力加持。',
     loseMsg: '时光洪流将你冲退。残像依旧伫立在裂隙中，仿佛一场永远不会醒来的梦。继续修炼，待你更强之时，再来叩问时间之门。'
@@ -333,8 +341,8 @@ var CHALLENGES = [
     icon: '✨',
     requireRealm: 1,
     requireStage: 8,
-    monster: { name: '经脉壁垒', hp: 22000, atk: 3000 },
-    rewardAptitude: 7.5,
+    monster: { name: '经脉壁垒', hp: 7200, atk: 680 },
+    rewardAptitude: 1.8,
     rewardSkill: 'ningmai_shu',
     rewardEquip: 'ningmai_lingyu',
     winMsg: '最后一处穴位贯通！全身经脉在同一瞬间共鸣——你感到一股前所未有的力量从丹田喷涌而出，流转周身。经脉贯通时凝结的灵力在胸口汇聚，化作一枚晶莹剔透的宝玉——凝脉灵玉。从此，你掌握了凝脉术，灵力贯通全身经脉，筑基之路已在眼前。',
@@ -347,8 +355,8 @@ var CHALLENGES = [
     icon: '🗡️',
     requireRealm: 2,
     requireStage: 3,
-    monster: { name: '剑灵', hp: 160000, atk: 24000 },
-    rewardAptitude: 18,
+    monster: { name: '剑灵', hp: 52000, atk: 4300 },
+    rewardAptitude: 3.2,
     rewardEquip: 'qingmingjian',
     winMsg: '剑灵散作漫天青光，重新凝聚于剑身之中。青冥剑发出一声清越长鸣，自行飞入你手中。剑柄微凉，却与你掌心脉动合而为一。自此，你不再是寻常修士——你是一名剑修。',
     loseMsg: '剑阵威压如山，剑意如潮水般将你逼退。你尚未领悟剑心真谛——回山修行，待剑意初成，再来取剑。'
@@ -360,8 +368,8 @@ var CHALLENGES = [
     icon: '🌩️',
     requireRealm: 2,
     requireStage: 8,
-    monster: { name: '天劫雷云', hp: 900000, atk: 110000 },
-    rewardAptitude: 42,
+    monster: { name: '天劫雷云', hp: 190000, atk: 16500 },
+    rewardAptitude: 5.5,
     rewardSkill: 'zhuji_xinfa',
     rewardEquip: 'zhuji_lingyu',
     winMsg: '最后一道天雷落下，你不再躲避——而是迎雷而上！雷劫之力灌入丹田，将你的灵根彻底淬炼。乌云散去，一枚紫光流转的灵玉在你掌心凝结——筑基灵玉，这是天道对渡过天劫者的馈赠。你已领悟筑基心法，丹田化鼎炉，从此踏入真正的仙道之途。',
@@ -375,11 +383,11 @@ var SKILLS = {
     desc: '淬炼筋骨，强化体魄。以灵气冲击经脉，令肉身坚如金石。',
     icon: '📜',
     levels: [
-      { name: '入门', bonus: 0.10, xp: 90 },
-      { name: '熟练', bonus: 0.24, xp: 240 },
-      { name: '小成', bonus: 0.45, xp: 620 },
-      { name: '大成', bonus: 0.78, xp: 1500 },
-      { name: '圆满', bonus: 1.20, xp: null }
+      { name: '入门', bonus: 0.08, xp: 80 },
+      { name: '熟练', bonus: 0.20, xp: 220 },
+      { name: '小成', bonus: 0.38, xp: 560 },
+      { name: '大成', bonus: 0.62, xp: 1300 },
+      { name: '圆满', bonus: 0.95, xp: null }
     ]
   },
   lianqi_jue: {
@@ -387,11 +395,11 @@ var SKILLS = {
     desc: '引导天地灵气化为己用，是踏入练气境界的钥匙。',
     icon: '🌀',
     levels: [
-      { name: '入门', bonus: 0.22, xp: 220 },
-      { name: '熟练', bonus: 0.55, xp: 600 },
-      { name: '小成', bonus: 1.05, xp: 1500 },
-      { name: '大成', bonus: 1.85, xp: 3800 },
-      { name: '圆满', bonus: 3.20, xp: null }
+      { name: '入门', bonus: 0.16, xp: 180 },
+      { name: '熟练', bonus: 0.40, xp: 520 },
+      { name: '小成', bonus: 0.78, xp: 1300 },
+      { name: '大成', bonus: 1.32, xp: 3000 },
+      { name: '圆满', bonus: 2.15, xp: null }
     ]
   },
   ningmai_shu: {
@@ -399,11 +407,11 @@ var SKILLS = {
     desc: '以灵为针、以气为线，将全身经脉一一贯通。经脉既通，法力自生，是踏入筑基境界的必经之途。',
     icon: '✨',
     levels: [
-      { name: '入门', bonus: 0.55, xp: 520 },
-      { name: '熟练', bonus: 1.20, xp: 1400 },
-      { name: '小成', bonus: 2.35, xp: 3600 },
-      { name: '大成', bonus: 4.20, xp: 9000 },
-      { name: '圆满', bonus: 7.20, xp: null }
+      { name: '入门', bonus: 0.34, xp: 420 },
+      { name: '熟练', bonus: 0.78, xp: 1150 },
+      { name: '小成', bonus: 1.48, xp: 2900 },
+      { name: '大成', bonus: 2.55, xp: 6800 },
+      { name: '圆满', bonus: 4.10, xp: null }
     ]
   },
   zhuji_xinfa: {
@@ -411,20 +419,20 @@ var SKILLS = {
     desc: '筑仙基以立天地，凝丹田而纳乾坤。筑基修士必须掌握的根基心法，丹田如鼎炉，灵力在其中淬炼提纯，威力倍增。',
     icon: '🔥',
     levels: [
-      { name: '入门', bonus: 1.20, xp: 1200 },
-      { name: '熟练', bonus: 2.70, xp: 3200 },
-      { name: '小成', bonus: 5.20, xp: 8200 },
-      { name: '大成', bonus: 9.50, xp: 21000 },
-      { name: '圆满', bonus: 16.00, xp: null }
+      { name: '入门', bonus: 0.70, xp: 950 },
+      { name: '熟练', bonus: 1.55, xp: 2600 },
+      { name: '小成', bonus: 2.95, xp: 6500 },
+      { name: '大成', bonus: 5.10, xp: 15000 },
+      { name: '圆满', bonus: 8.20, xp: null }
     ]
   }
 };
 
 var EQUIP_QUALITIES = [
   { name: '凡品', color: '#aaa', multiplier: 1.0 },
-  { name: '灵品', color: '#7eb8da', multiplier: 1.4 },
-  { name: '真品', color: '#c9a96e', multiplier: 2.1 },
-  { name: '极品', color: '#ffd700', multiplier: 3.1 }
+  { name: '灵品', color: '#7eb8da', multiplier: 1.35 },
+  { name: '真品', color: '#c9a96e', multiplier: 1.9 },
+  { name: '极品', color: '#ffd700', multiplier: 2.65 }
 ];
 
 var EQUIPMENT = {
@@ -433,58 +441,116 @@ var EQUIPMENT = {
     icon: '🔮',
     desc: '凝聚天地灵气，加快修炼速度。灵力如泉涌，修为日进千里。',
     type: 'cultivate_speed',
-    baseEffect: 0.16,
-    upgradeCosts: [40, 160, 640]
+    baseEffect: 0.12,
+    upgradeCosts: [55, 220, 760]
   },
   xuantiejian: {
     name: '玄铁剑',
     icon: '⚔️',
     desc: '以千年玄铁锻造而成。剑身暗沉无光，入手却沉重异常。一剑斩出，虎啸龙吟。',
     type: 'attack_hp',
-    baseEffect: 0.14,
-    upgradeCosts: [70, 260, 900]
+    baseEffect: 0.12,
+    upgradeCosts: [85, 320, 1050]
   },
   lingxinyu: {
     name: '灵心玉',
     icon: '💠',
     desc: '一块温润通透的灵玉，贴身佩戴可宁心静气，吸纳天地灵气的速度倍增。据说是上古修士坐化时以毕生修为凝结而成。',
     type: 'cultivate_speed',
-    baseEffect: 0.18,
-    upgradeCosts: [260, 900, 3000]
+    baseEffect: 0.15,
+    upgradeCosts: [380, 1250, 3900]
   },
   shisha_xianglian: {
     name: '时砂项链',
     icon: '⏳',
     desc: '以时间之砂凝铸而成。佩戴者周身时光流速异于常人，攻守之间皆有岁月之力加持。',
     type: 'attack_hp',
-    baseEffect: 0.16,
-    upgradeCosts: [520, 1800, 6000]
+    baseEffect: 0.14,
+    upgradeCosts: [750, 2400, 7600]
   },
   ningmai_lingyu: {
     name: '凝脉灵玉',
     icon: '💎',
     desc: '经脉贯通之际，灵力凝结而成的宝玉。蕴含经脉共鸣之力，修炼时周身灵气如潮水般涌入丹田。',
     type: 'cultivate_speed',
-    baseEffect: 0.22,
-    upgradeCosts: [1200, 4200, 14000]
+    baseEffect: 0.18,
+    upgradeCosts: [1600, 5200, 16500]
   },
   qingmingjian: {
     name: '青冥剑',
     icon: '🗡️',
     desc: '剑身薄如蝉翼，通体泛青冥之光。据传以天外陨铁混合万年寒玉锻造而成，剑出如青冥裂空，筑基修士持之可越阶而战。',
     type: 'attack_hp',
-    baseEffect: 0.19,
-    upgradeCosts: [2600, 9000, 32000]
+    baseEffect: 0.16,
+    upgradeCosts: [3600, 11500, 38000]
   },
   zhuji_lingyu: {
     name: '筑基灵玉',
     icon: '🟣',
     desc: '筑基大成时以丹田真元凝聚的灵玉，蕴含筑基修士毕生精华。佩戴于身，天地灵气如江河汇海般涌入丹田，修炼速度远超寻常。',
     type: 'cultivate_speed',
-    baseEffect: 0.26,
-    upgradeCosts: [5000, 18000, 65000]
+    baseEffect: 0.21,
+    upgradeCosts: [7000, 23000, 76000]
   }
 };
+
+var ACHIEVEMENTS = [
+  { id: 'intro_path', name: '初入仙途', desc: '完成开场剧情，真正踏上修行路。', target: 'intro', value: 1, reward: { stones: 40 } },
+  { id: 'first_cultivation', name: '第一次修炼', desc: '灵力达到第一次突破需求。', target: 'firstPower', value: REALMS[0].costs[0], reward: { items: [{ id: 'lingli_dan_1', count: 1 }] } },
+  { id: 'mortal_stage_3', name: '小有所成', desc: '突破到凡人三阶。', target: 'realmStage', realm: 0, stage: 2, reward: { items: [{ id: 'aptitude_dan_1', count: 1 }] } },
+  { id: 'first_explore', name: '初探秘境', desc: '完成一次游历，并至少击败 1 只妖兽。', target: 'stat', stat: 'exploreRuns', value: 1, reward: { stones: 90 } },
+  { id: 'first_encounter', name: '奇遇初见', desc: '触发 1 次奇遇。', target: 'stat', stat: 'encounters', value: 1, reward: { power: 220 } },
+  { id: 'risk_for_dao', name: '险中求道', desc: '选择 1 次冒险奇遇选项。', target: 'stat', stat: 'adventureChoices', value: 1, reward: { aptitude: 0.06 } },
+  { id: 'pills_taken', name: '丹药入腹', desc: '累计使用 3 枚丹药。', target: 'stat', stat: 'itemsUsed', value: 3, reward: { stones: 140 } },
+  { id: 'skill_familiar', name: '功法精进', desc: '任意功法达到熟练。', target: 'skillLevel', value: 1, reward: { skillXp: 100 } },
+  { id: 'tiger_slayer', name: '剑斩虎妖', desc: '完成挑战一：森林试炼。', target: 'challenge', challenge: 'challenge_1', reward: { stones: 160 } },
+  { id: 'enter_qi', name: '踏入练气', desc: '突破到练气境。', target: 'realm', value: 1, reward: { items: [{ id: 'lingli_dan_2', count: 1 }] } },
+  { id: 'brave_heart', name: '问心无惧', desc: '完成挑战二：踏上修行路。', target: 'challenge', challenge: 'challenge_2', reward: { aptitude: 0.22 } },
+  { id: 'demo_path', name: 'Demo 登仙路', desc: '达到金丹，完成当前 Demo 主线。', target: 'realm', value: 3, reward: { stones: 1000 } }
+];
+
+var ENCOUNTERS = [
+  {
+    id: 'spring',
+    name: '灵泉一脉',
+    desc: '石壁裂开一道细泉，灵气清冽，却隐隐带着冲脉之力。',
+    options: [
+      { id: 'safe', label: '引泉疗伤', tone: '稳妥', desc: '恢复血量，并获得少量灵力。' },
+      { id: 'risk', label: '强行吸收', tone: '冒险', desc: '获得更多灵力，但会损伤气血。' },
+      { id: 'rest', label: '静坐调息', tone: '离开', desc: '不取灵泉，只恢复更多血量。' }
+    ]
+  },
+  {
+    id: 'herb',
+    name: '古藤药香',
+    desc: '古藤缠绕的岩缝里露出药香，似有丹药被灵气温养多年。',
+    options: [
+      { id: 'safe', label: '谨慎采药', tone: '稳妥', desc: '获得 1 枚当前品阶丹药。' },
+      { id: 'risk', label: '深入采摘', tone: '冒险', desc: '有概率额外获得 1 枚丹药。' },
+      { id: 'rest', label: '折枝离去', tone: '离开', desc: '放弃主药，恢复少量血量。' }
+    ]
+  },
+  {
+    id: 'stele',
+    name: '残碑剑痕',
+    desc: '半截古碑横卧草间，碑上剑痕仍有未散道韵。',
+    options: [
+      { id: 'safe', label: '观痕悟法', tone: '稳妥', desc: '获得功法修为。' },
+      { id: 'risk', label: '以神入碑', tone: '冒险', desc: '获得更多功法修为，但会损血。' },
+      { id: 'rest', label: '拓印残痕', tone: '离开', desc: '获得少量资质。' }
+    ]
+  },
+  {
+    id: 'lair',
+    name: '妖兽巢穴',
+    desc: '你发现一处新鲜巢穴，里面有灵石气息，也有压低的喘息声。',
+    options: [
+      { id: 'safe', label: '绕路离开', tone: '稳妥', desc: '避开危险，恢复少量血量。' },
+      { id: 'risk', label: '潜入偷取', tone: '冒险', desc: '获得灵石，但可能惊动妖兽受伤。' },
+      { id: 'fight', label: '主动挑战', tone: '战斗', desc: '立刻挑战一只额外妖兽。' }
+    ]
+  }
+];
 
 function getEquipCultivateMultiplier() {
   var multi = 1.0;
@@ -599,6 +665,182 @@ function fmtNum(n) {
   return value.toFixed(value >= 100 || value % 1 === 0 ? 0 : 1) + units[unitIndex];
 }
 
+function getDefaultStats() {
+  return {
+    exploreRuns: 0,
+    encounters: 0,
+    adventureChoices: 0,
+    itemsUsed: 0
+  };
+}
+
+function ensureGameStateShape() {
+  if (!gameState.achievements) gameState.achievements = {};
+  if (!gameState.stats) gameState.stats = {};
+  var defaults = getDefaultStats();
+  Object.keys(defaults).forEach(function(key) {
+    if (gameState.stats[key] == null) gameState.stats[key] = defaults[key];
+  });
+  if (!('pendingEncounter' in gameState)) gameState.pendingEncounter = null;
+  ACHIEVEMENTS.forEach(function(a) {
+    if (!gameState.achievements[a.id]) {
+      gameState.achievements[a.id] = { completed: false, claimed: false };
+    } else {
+      gameState.achievements[a.id].completed = gameState.achievements[a.id].completed === true;
+      gameState.achievements[a.id].claimed = gameState.achievements[a.id].claimed === true;
+    }
+  });
+}
+
+function getAchievementProgress(a) {
+  if (a.target === 'intro') return gameState.introSeen ? 1 : 0;
+  if (a.target === 'firstPower') {
+    return meetsRealmStage(0, 1) ? a.value : Math.min(a.value, gameState.currentPower);
+  }
+  if (a.target === 'realmStage') return meetsRealmStage(a.realm, a.stage) ? 1 : 0;
+  if (a.target === 'stat') return gameState.stats[a.stat] || 0;
+  if (a.target === 'skillLevel') {
+    var best = 0;
+    Object.keys(gameState.skills).forEach(function(id) {
+      var s = gameState.skills[id];
+      if (s && s.owned) best = Math.max(best, s.levelIndex || 0);
+    });
+    return best;
+  }
+  if (a.target === 'challenge') return isChallengeCompleted(a.challenge) ? 1 : 0;
+  if (a.target === 'realm') return gameState.realmIndex;
+  return 0;
+}
+
+function getAchievementGoal(a) {
+  if (a.target === 'intro' || a.target === 'realmStage' || a.target === 'challenge') return 1;
+  return a.value || 1;
+}
+
+function isAchievementComplete(a) {
+  return getAchievementProgress(a) >= getAchievementGoal(a);
+}
+
+function describeReward(reward) {
+  var parts = [];
+  if (!reward) return '无';
+  if (reward.stones) parts.push('灵石×' + fmtNum(reward.stones));
+  if (reward.power) parts.push('灵力+' + fmtNum(reward.power));
+  if (reward.aptitude) parts.push('资质+' + reward.aptitude.toFixed(2));
+  if (reward.skillXp) parts.push('功法XP+' + fmtNum(reward.skillXp));
+  if (reward.items) {
+    reward.items.forEach(function(r) {
+      var item = ITEMS[r.id];
+      if (item) parts.push(item.name + '×' + r.count);
+    });
+  }
+  return parts.join('，');
+}
+
+function grantRewardSkillXp(amount) {
+  var remaining = amount;
+  Object.keys(gameState.skills).some(function(id) {
+    var s = gameState.skills[id];
+    var def = SKILLS[id];
+    if (!s || !s.owned || !def || s.levelIndex >= def.levels.length - 1) return false;
+    s.currentXp += remaining;
+    while (s.levelIndex < def.levels.length - 1) {
+      var needXp = def.levels[s.levelIndex].xp;
+      if (needXp == null || s.currentXp < needXp) break;
+      var nextLevel = s.levelIndex + 1;
+      var req = getSkillLevelRequirement(id, nextLevel);
+      if (req && !meetsRealmStage(req.realm, req.stage)) {
+        s.currentXp = needXp;
+        break;
+      }
+      s.currentXp -= needXp;
+      s.levelIndex++;
+    }
+    return true;
+  });
+}
+
+function applyAchievementReward(reward) {
+  if (!reward) return;
+  if (reward.stones) gameState.spiritStones += reward.stones;
+  if (reward.power) gameState.currentPower += reward.power;
+  if (reward.aptitude) gameState.aptitude += reward.aptitude;
+  if (reward.skillXp) grantRewardSkillXp(reward.skillXp);
+  if (reward.items) {
+    reward.items.forEach(function(r) {
+      var item = ITEMS[r.id];
+      if (item) addToInventory(r.id, item.name, r.count);
+    });
+  }
+}
+
+function checkAchievements(silent) {
+  ensureGameStateShape();
+  var changed = false;
+  ACHIEVEMENTS.forEach(function(a) {
+    var state = gameState.achievements[a.id];
+    if (!state.completed && isAchievementComplete(a)) {
+      state.completed = true;
+      changed = true;
+      if (!silent) showToast('成就达成：' + a.name);
+    }
+  });
+  if (changed) {
+    buildAchievementTab();
+    persistCurrentSlot();
+  }
+}
+
+function trackStat(type, amount) {
+  ensureGameStateShape();
+  gameState.stats[type] = (gameState.stats[type] || 0) + (amount || 1);
+  checkAchievements(false);
+}
+
+function claimAchievement(id) {
+  ensureGameStateShape();
+  var a = ACHIEVEMENTS.find(function(item) { return item.id === id; });
+  if (!a) return;
+  var state = gameState.achievements[id];
+  if (!state.completed || state.claimed) return;
+  state.claimed = true;
+  applyAchievementReward(a.reward);
+  showToast('领取成就奖励：' + describeReward(a.reward));
+  updateRealmDisplay();
+  updateCultivateTab();
+  buildAlchemyTab();
+  buildSkillTab();
+  buildEquipTab();
+  buildAchievementTab();
+  checkAchievements(true);
+  persistCurrentSlot();
+}
+
+function buildAchievementTab() {
+  var container = document.getElementById('achievement-container');
+  if (!container) return;
+  ensureGameStateShape();
+  var html = '<div class="achievement-summary">成就会引导你体验 Demo 主线，奖励用于加快前 45 分钟节奏。</div>';
+  ACHIEVEMENTS.forEach(function(a) {
+    var state = gameState.achievements[a.id];
+    var progress = Math.min(getAchievementProgress(a), getAchievementGoal(a));
+    var goal = getAchievementGoal(a);
+    var pct = Math.min(100, Math.floor(progress / goal * 100));
+    var status = state.claimed ? '已领取' : (state.completed ? '可领取' : '进行中');
+    html += '<div class="achievement-card ' + (state.completed ? 'complete' : '') + '">';
+    html += '<div class="achievement-main">';
+    html += '<div class="achievement-title-row"><span class="achievement-title">' + a.name + '</span><span class="achievement-status">' + status + '</span></div>';
+    html += '<div class="achievement-desc">' + a.desc + '</div>';
+    html += '<div class="achievement-reward">奖励：' + describeReward(a.reward) + '</div>';
+    html += '<div class="achievement-progress"><div class="achievement-progress-bar" style="width:' + pct + '%"></div></div>';
+    html += '<div class="achievement-count">' + fmtNum(progress) + ' / ' + fmtNum(goal) + '</div>';
+    html += '</div>';
+    html += '<button class="btn-achievement-claim" onclick="claimAchievement(\'' + a.id + '\')"' + (!state.completed || state.claimed ? ' disabled' : '') + '>领 取</button>';
+    html += '</div>';
+  });
+  container.innerHTML = html;
+}
+
 function updateRealmDisplay() {
   var realm = REALMS[gameState.realmIndex];
   var stage = gameState.stageIndex;
@@ -635,6 +877,7 @@ function cultivateTick() {
   updateRealmDisplay();
   updateCultivateTab();
   buildDungeonList();
+  checkAchievements(false);
 }
 
 function breakthrough() {
@@ -654,6 +897,8 @@ function breakthrough() {
   updateRealmDisplay();
   updateCultivateTab();
   maybeShowDemoComplete();
+  checkAchievements(false);
+  buildAchievementTab();
 }
 
 function doTribulation() {
@@ -681,6 +926,8 @@ function doTribulation() {
   buildDungeonList();
   buildChallengeList();
   maybeShowDemoComplete();
+  checkAchievements(false);
+  buildAchievementTab();
 }
 
 function startCultivate() {
@@ -725,6 +972,9 @@ function deserializeState(str) {
   gameState.spiritStones = data.spiritStones || 0;
   gameState.inventory = data.inventory || {};
   gameState.completedChallenges = data.completedChallenges || [];
+  gameState.achievements = data.achievements || {};
+  gameState.stats = data.stats || getDefaultStats();
+  gameState.pendingEncounter = null;
   gameState.introSeen = data.introSeen !== false;
   gameState.demoCompleteSeen = data.demoCompleteSeen === true;
   if (data.skills) {
@@ -761,6 +1011,8 @@ function deserializeState(str) {
   } else {
     gameState.equipment = { julingzhu: { owned: true, qualityIndex: 0 }, xuantiejian: { owned: false, qualityIndex: 0 }, lingxinyu: { owned: false, qualityIndex: 0 }, shisha_xianglian: { owned: false, qualityIndex: 0 }, ningmai_lingyu: { owned: false, qualityIndex: 0 }, qingmingjian: { owned: false, qualityIndex: 0 }, zhuji_lingyu: { owned: false, qualityIndex: 0 } };
   }
+  ensureGameStateShape();
+  checkAchievements(true);
 }
 
 function resetNewGameState(introSeen) {
@@ -771,6 +1023,9 @@ function resetNewGameState(introSeen) {
   gameState.spiritStones = 0;
   gameState.inventory = {};
   gameState.completedChallenges = [];
+  gameState.achievements = {};
+  gameState.stats = getDefaultStats();
+  gameState.pendingEncounter = null;
   gameState.introSeen = introSeen === true;
   gameState.demoCompleteSeen = false;
   gameState.skills = {
@@ -788,6 +1043,8 @@ function resetNewGameState(introSeen) {
     qingmingjian: { owned: false, qualityIndex: 0 },
     zhuji_lingyu: { owned: false, qualityIndex: 0 }
   };
+  ensureGameStateShape();
+  checkAchievements(true);
 }
 
 function showToast(msg) {
@@ -875,6 +1132,7 @@ function advanceIntroStory() {
 
 function finishIntroStory() {
   gameState.introSeen = true;
+  checkAchievements(false);
   persistCurrentSlot();
   var overlay = document.getElementById('intro-story-overlay');
   overlay.classList.remove('active');
@@ -885,6 +1143,7 @@ function finishIntroStory() {
 function maybeShowDemoComplete() {
   if (gameState.demoCompleteSeen || gameState.realmIndex < 3) return;
   gameState.demoCompleteSeen = true;
+  checkAchievements(false);
   persistCurrentSlot();
   var overlay = document.getElementById('demo-complete-overlay');
   if (!overlay) return;
@@ -1030,6 +1289,9 @@ function initTabs() {
     if (btn.getAttribute('data-tab') === 'equip') {
       buildEquipTab();
     }
+    if (btn.getAttribute('data-tab') === 'achievement') {
+      buildAchievementTab();
+    }
     });
   });
 }
@@ -1086,9 +1348,11 @@ function useItem(itemId) {
     delete gameState.inventory[itemId];
   }
 
+  trackStat('itemsUsed', 1);
   updateRealmDisplay();
   updateCultivateTab();
   buildAlchemyTab();
+  buildAchievementTab();
 }
 
 function useAllOfItem(itemId) {
@@ -1109,9 +1373,11 @@ function useAllOfItem(itemId) {
   }
 
   delete gameState.inventory[itemId];
+  trackStat('itemsUsed', count);
   updateRealmDisplay();
   updateCultivateTab();
   buildAlchemyTab();
+  buildAchievementTab();
 }
 
 function buildSkillTab() {
@@ -1227,6 +1493,8 @@ function cultivateSkill(skillId) {
     updateRealmDisplay();
     updateCultivateTab();
     buildSkillTab();
+    checkAchievements(false);
+    buildAchievementTab();
   }, BALANCE.skillCultivateMs);
 }
 
@@ -1259,6 +1527,7 @@ function useAllItems() {
   if (usedAptitudeCount > 0) {
     gameState.aptitude += totalAptitude;
   }
+  trackStat('itemsUsed', usedPowerCount + usedAptitudeCount);
   var msg = '一键使用 ' + (usedPowerCount + usedAptitudeCount) + ' 个丹药';
   if (usedPowerCount > 0) msg += '，灵力 +' + totalPower;
   if (usedAptitudeCount > 0) msg += '，资质 +' + totalAptitude.toFixed(2);
@@ -1266,6 +1535,7 @@ function useAllItems() {
   updateRealmDisplay();
   updateCultivateTab();
   buildAlchemyTab();
+  buildAchievementTab();
 }
 
 function buildEquipTab() {
@@ -1351,6 +1621,17 @@ var exploreStartedAt = 0;
 var explorePlayerHP = 0;
 var exploreSessionLoot = null;
 
+function setMonsterListVisible(visible) {
+  var titles = document.querySelectorAll('.detail-section-title');
+  titles.forEach(function(title) {
+    if (title.textContent === '怪物列表') {
+      title.style.display = visible ? '' : 'none';
+    }
+  });
+  var list = document.getElementById('monster-list');
+  if (list) list.style.display = visible ? '' : 'none';
+}
+
 function requireToText(realmIdx, stageIdx) {
   return REALMS[realmIdx].name + ' · ' + CHINESE_NUM[stageIdx + 1] + '阶';
 }
@@ -1392,6 +1673,7 @@ function openDungeonDetail(dungeon) {
   document.getElementById('btn-explore').disabled = false;
   document.getElementById('btn-explore').textContent = '开 始 游 历';
   document.getElementById('explore-status').style.display = 'none';
+  setMonsterListVisible(true);
 
   var mList = document.getElementById('monster-list');
   mList.innerHTML = '';
@@ -1413,6 +1695,7 @@ function openDungeonDetail(dungeon) {
 
   document.getElementById('explore-log').innerHTML = '';
   document.getElementById('log-title').style.display = 'none';
+  hideEncounterPanel();
 }
 
 function backToDungeonList() {
@@ -1630,6 +1913,105 @@ function getDungeonItemTier() {
   return Math.max(1, Math.min(6, currentDungeon.requireRealm * 2 + Math.floor(currentDungeon.requireStage / 4) + 1));
 }
 
+function getEncounterById(id) {
+  return ENCOUNTERS.find(function(e) { return e.id === id; }) || ENCOUNTERS[0];
+}
+
+function hideEncounterPanel() {
+  var panel = document.getElementById('encounter-panel');
+  if (panel) {
+    panel.style.display = 'none';
+    panel.innerHTML = '';
+  }
+}
+
+function renderEncounterPanel(encounter) {
+  var panel = document.getElementById('encounter-panel');
+  if (!panel) return;
+  var html = '<div class="encounter-kicker">奇遇抉择</div>';
+  html += '<div class="encounter-title">' + encounter.name + '</div>';
+  html += '<div class="encounter-desc">' + encounter.desc + '</div>';
+  html += '<div class="encounter-options">';
+  encounter.options.forEach(function(option) {
+    html += '<button class="encounter-option" onclick="chooseEncounterOption(\'' + option.id + '\')">';
+    html += '<span class="encounter-option-tone">' + option.tone + '</span>';
+    html += '<span class="encounter-option-name">' + option.label + '</span>';
+    html += '<span class="encounter-option-desc">' + option.desc + '</span>';
+    html += '</button>';
+  });
+  html += '</div>';
+  panel.innerHTML = html;
+  panel.style.display = 'block';
+}
+
+function showEncounter(encounterId) {
+  var encounter = getEncounterById(encounterId);
+  gameState.pendingEncounter = { id: encounter.id };
+  addLog('奇遇：' + encounter.name + '。请选择如何应对。', 'loot');
+  renderEncounterPanel(encounter);
+  updateExploreStatus();
+  persistCurrentSlot();
+}
+
+function recoverExploreHP(rate, label) {
+  var maxHP = getPlayerMaxHP();
+  var amount = Math.ceil(maxHP * rate);
+  explorePlayerHP = Math.min(maxHP, explorePlayerHP + amount);
+  addLog(label + '，血量 +' + amount + '（' + explorePlayerHP + ' / ' + maxHP + '）', 'loot');
+}
+
+function damageExploreHP(rate, label) {
+  var maxHP = getPlayerMaxHP();
+  var amount = Math.max(1, Math.ceil(maxHP * rate));
+  explorePlayerHP = Math.max(0, explorePlayerHP - amount);
+  addLog(label + '，血量 -' + amount + '（' + explorePlayerHP + ' / ' + maxHP + '）', 'lose');
+  if (explorePlayerHP <= 0) {
+    addLog('气血耗尽，游历被迫中止。', 'lose');
+    stopExplore('defeat');
+    return false;
+  }
+  return true;
+}
+
+function grantEncounterPower(amount, label) {
+  gameState.currentPower += amount;
+  exploreSessionLoot.power += amount;
+  addLog(label + '，灵力 +' + fmtNum(amount), 'loot');
+}
+
+function grantEncounterAptitude(amount, label) {
+  gameState.aptitude += amount;
+  exploreSessionLoot.aptitude += amount;
+  addLog(label + '，资质 +' + amount.toFixed(2), 'loot');
+}
+
+function grantEncounterStones(amount, label) {
+  gameState.spiritStones += amount;
+  exploreSessionLoot.stones += amount;
+  addLog(label + '，灵石 ×' + fmtNum(amount), 'loot');
+}
+
+function grantEncounterItem(extraChance) {
+  var tier = getDungeonItemTier();
+  var itemId = Math.random() < 0.5 ? 'lingli_dan_' + tier : 'aptitude_dan_' + tier;
+  var item = ITEMS[itemId];
+  if (!item) return;
+  var count = 1 + (Math.random() < extraChance ? 1 : 0);
+  addToInventory(itemId, item.name, count);
+  recordExploreItem(itemId, item.name, count);
+  addLog('获得 ' + item.name + ' ×' + count, 'loot');
+}
+
+function grantEncounterSkillXp(amount, label) {
+  var skillName = grantExploreSkillXp(amount);
+  if (skillName) {
+    exploreSessionLoot.skillXp += amount;
+    addLog(label + '，' + skillName + ' 修为 +' + amount, 'loot');
+  } else {
+    grantEncounterAptitude(0.02 + currentDungeon.requireRealm * 0.025, label);
+  }
+}
+
 function grantExploreSkillXp(amount) {
   var skillId = null;
   Object.keys(gameState.skills).some(function(id) {
@@ -1708,7 +2090,7 @@ function resolveExploreMonster(monster) {
 
 function resolveExploreRecovery() {
   var maxHP = getPlayerMaxHP();
-  var rate = 0.2 + Math.random() * 0.15;
+  var rate = 0.22 + Math.random() * 0.14;
   var recoverHP = Math.ceil(maxHP * rate);
   explorePlayerHP = Math.min(maxHP, explorePlayerHP + recoverHP);
   addLog('寻得静处调息，血量 +' + recoverHP + '（' + explorePlayerHP + ' / ' + maxHP + '）');
@@ -1717,7 +2099,7 @@ function resolveExploreRecovery() {
 
 function resolveExploreResource() {
   var tier = getDungeonItemTier();
-  var itemId = Math.random() < 0.72 ? 'lingli_dan_' + tier : 'aptitude_dan_' + tier;
+  var itemId = Math.random() < 0.70 ? 'lingli_dan_' + tier : 'aptitude_dan_' + tier;
   var item = ITEMS[itemId];
   if (item) {
     addToInventory(itemId, item.name, 1);
@@ -1725,7 +2107,7 @@ function resolveExploreResource() {
     addLog('在石隙中发现 ' + item.name + ' ×1', 'loot');
     buildAlchemyTab();
   } else {
-    var stones = Math.max(8, Math.floor(getPlayerATK() * 0.35));
+    var stones = Math.max(10, Math.floor(getPlayerATK() * 0.32));
     gameState.spiritStones += stones;
     exploreSessionLoot.stones += stones;
     addLog('发现散落灵石 ×' + stones, 'loot');
@@ -1737,42 +2119,77 @@ function resolveExploreResource() {
 
 function resolveExploreEvent() {
   exploreEventCount++;
-  var roll = Math.random();
-  var maxHP = getPlayerMaxHP();
-  if (roll < 0.34) {
-    var recover = Math.ceil(maxHP * 0.3);
-    var power = Math.max(1, Math.floor(getGainPerSec() * 18));
-    explorePlayerHP = Math.min(maxHP, explorePlayerHP + recover);
-    gameState.currentPower += power;
-    exploreSessionLoot.power += power;
-    addLog('奇遇：灵泉一脉。血量 +' + recover + '，灵力 +' + fmtNum(power), 'loot');
-  } else if (roll < 0.67) {
-    var tier = getDungeonItemTier();
-    var itemId = Math.random() < 0.5 ? 'lingli_dan_' + tier : 'aptitude_dan_' + tier;
-    var item = ITEMS[itemId];
-    if (item) {
-      addToInventory(itemId, item.name, 1);
-      recordExploreItem(itemId, item.name, 1);
-      addLog('奇遇：古藤药香。获得 ' + item.name + ' ×1', 'loot');
-    }
-  } else {
-    var xp = Math.max(1, Math.floor(getSkillXpPerClick() * 1.6));
-    var skillName = grantExploreSkillXp(xp);
-    if (skillName) {
-      exploreSessionLoot.skillXp += xp;
-      addLog('奇遇：残碑剑痕。' + skillName + ' 修为 +' + xp, 'loot');
+  trackStat('encounters', 1);
+  var encounter = ENCOUNTERS[Math.floor(Math.random() * ENCOUNTERS.length)];
+  showEncounter(encounter.id);
+}
+
+function chooseEncounterOption(optionId) {
+  if (!exploring || !gameState.pendingEncounter) return;
+  var encounter = getEncounterById(gameState.pendingEncounter.id);
+  var option = encounter.options.find(function(o) { return o.id === optionId; });
+  if (!option) return;
+  hideEncounterPanel();
+  gameState.pendingEncounter = null;
+  addLog('你选择：' + option.label + '。');
+  if (option.tone === '冒险') {
+    trackStat('adventureChoices', 1);
+  }
+
+  if (encounter.id === 'spring') {
+    if (optionId === 'safe') {
+      recoverExploreHP(0.22, '灵泉洗脉');
+      grantEncounterPower(Math.max(1, Math.floor(getGainPerSec() * 10)), '泉中灵气入体');
+    } else if (optionId === 'risk') {
+      grantEncounterPower(Math.max(1, Math.floor(getGainPerSec() * 24)), '你强行吞纳灵泉');
+      if (!damageExploreHP(0.13, '灵气反噬')) return;
     } else {
-      var aptitude = 0.02 + currentDungeon.requireRealm * 0.03;
-      gameState.aptitude += aptitude;
-      exploreSessionLoot.aptitude += aptitude;
-      addLog('奇遇：残碑剑痕。资质 +' + aptitude.toFixed(2), 'loot');
+      recoverExploreHP(0.36, '你在泉边静坐调息');
+    }
+  } else if (encounter.id === 'herb') {
+    if (optionId === 'safe') {
+      grantEncounterItem(0);
+    } else if (optionId === 'risk') {
+      grantEncounterItem(0.55);
+      if (Math.random() < 0.40 && !damageExploreHP(0.09, '藤刺划破经脉')) return;
+    } else {
+      recoverExploreHP(0.14, '药香安神');
+    }
+  } else if (encounter.id === 'stele') {
+    if (optionId === 'safe') {
+      grantEncounterSkillXp(Math.max(1, Math.floor(getSkillXpPerClick() * 1.45)), '你观摩残碑剑痕');
+    } else if (optionId === 'risk') {
+      grantEncounterSkillXp(Math.max(1, Math.floor(getSkillXpPerClick() * 2.8)), '你以神识撞入碑中');
+      if (!damageExploreHP(0.15, '剑意割体')) return;
+    } else {
+      grantEncounterAptitude(0.02 + currentDungeon.requireRealm * 0.025, '你拓下残痕，心有所悟');
+    }
+  } else if (encounter.id === 'lair') {
+    if (optionId === 'safe') {
+      recoverExploreHP(0.10, '你绕开巢穴，稳住气息');
+    } else if (optionId === 'risk') {
+      grantEncounterStones(Math.max(16, Math.floor(getPlayerATK() * 0.45)), '你从巢穴中取走灵石');
+      if (Math.random() < 0.45 && !damageExploreHP(0.12, '巢穴妖气反扑')) return;
+    } else {
+      addLog('你踏入巢穴深处，主动迎战。', 'loot');
+      updateRealmDisplay();
+      updateCultivateTab();
+      buildAlchemyTab();
+      updateExploreStatus();
+      checkAchievements(false);
+      persistCurrentSlot();
+      resolveExploreMonster(getRandomExploreMonster());
+      return;
     }
   }
+
   updateRealmDisplay();
   updateCultivateTab();
   buildAlchemyTab();
   updateExploreStatus();
+  checkAchievements(false);
   persistCurrentSlot();
+  if (exploring) scheduleExploreTick();
 }
 
 function getBattleComment(type, name) {
@@ -1866,19 +2283,20 @@ function exploreTick() {
   updateExploreStatus();
 
   var roll = Math.random();
-  if (roll < 0.65) {
+  if (roll < 0.58) {
     resolveExploreMonster(getRandomExploreMonster());
     return;
-  } else if (roll < 0.80) {
+  } else if (roll < 0.72) {
     resolveExploreRecovery();
-  } else if (roll < 0.90) {
+  } else if (roll < 0.88) {
     resolveExploreResource();
   } else {
     resolveExploreEvent();
+    return;
   }
 
   if (!exploring) return;
-  if (Math.random() < 0.18) {
+  if (Math.random() < 0.16) {
     addLog('你继续向秘境深处游历……');
   }
   scheduleExploreTick();
@@ -1901,6 +2319,8 @@ function stopExplore(reason) {
     clearTimeout(exploreBattleTimer);
     exploreBattleTimer = null;
   }
+  gameState.pendingEncounter = null;
+  hideEncounterPanel();
   stopExploreStatusTimer();
   var wasExploring = exploring;
   exploring = false;
@@ -1909,8 +2329,12 @@ function stopExplore(reason) {
     btn.disabled = false;
     btn.textContent = '开 始 游 历';
   }
+  setMonsterListVisible(true);
   updateExploreStatus();
   if (!wasExploring) return;
+  if (reason !== 'defeat' && exploreKills > 0) {
+    trackStat('exploreRuns', 1);
+  }
 
   if (reason === 'defeat') {
     addLog('──── 游历失败 ────', 'lose');
@@ -1921,6 +2345,7 @@ function stopExplore(reason) {
   }
   addLog('用时 ' + getExploreDurationText() + '，击败妖兽 ' + exploreKills + '，奇遇 ' + exploreEventCount + ' 次。');
   addLog('本轮收获：' + getExploreLootText(), 'loot');
+  buildAchievementTab();
   persistCurrentSlot();
 }
 
@@ -1932,11 +2357,14 @@ function startExplore() {
   }
   resetExploreSession();
   exploring = true;
+  gameState.pendingEncounter = null;
+  hideEncounterPanel();
   document.getElementById('explore-log').innerHTML = '';
   document.getElementById('log-title').style.display = 'block';
   document.getElementById('btn-explore').disabled = false;
   document.getElementById('btn-explore').textContent = '停 止 游 历';
   document.getElementById('explore-status').style.display = 'grid';
+  setMonsterListVisible(false);
 
   addLog('开始游历 ' + currentDungeon.name + '……');
   addLog('角色血量 ' + explorePlayerHP + ' | 攻击 ' + getPlayerATK());
@@ -2062,6 +2490,7 @@ function startChallenge() {
     addChallengeLog('你战胜了 ' + m.name + '！', 'win');
     gameState.aptitude += c.rewardAptitude;
     gameState.completedChallenges.push(c.id);
+    checkAchievements(false);
     var rewardHtml = '资质 +' + c.rewardAptitude;
     if (c.rewardSkill) {
       var skillDef = SKILLS[c.rewardSkill];
@@ -2099,6 +2528,8 @@ function startChallenge() {
 
   updateRealmDisplay();
   updateCultivateTab();
+  buildAchievementTab();
+  persistCurrentSlot();
   challengeFighting = false;
 }
 
@@ -2244,6 +2675,7 @@ function selectSave(slotNum) {
     updateCultivateTab();
     initTabs();
     buildDungeonList();
+    buildAchievementTab();
     if (shouldShowIntro && !gameState.introSeen) {
       showIntroStory();
     } else {
