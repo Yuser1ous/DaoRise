@@ -944,16 +944,16 @@ function stopCultivate() {
 
 function updateCultivateTab() {
   var gps = getGainPerSec();
-  document.getElementById('cult-gain').textContent = '每秒灵力获取：' + fmtNum(gps);
-  document.getElementById('cult-aptitude').textContent = '资质：' + gameState.aptitude.toFixed(2);
-  document.getElementById('cult-skill').textContent = '功法倍率：×' + getSkillMultiplier().toFixed(2);
-  document.getElementById('cult-equip-cult').textContent = '修炼倍率(装)：×' + getEquipCultivateMultiplier().toFixed(2);
-  document.getElementById('cult-equip-battle').textContent = '战斗倍率(装)：×' + getEquipBattleMultiplier().toFixed(2);
+  document.getElementById('cult-gain').textContent = fmtNum(gps);
+  document.getElementById('cult-aptitude').textContent = gameState.aptitude.toFixed(2);
+  document.getElementById('cult-skill').textContent = '×' + getSkillMultiplier().toFixed(2);
+  document.getElementById('cult-equip-cult').textContent = '×' + getEquipCultivateMultiplier().toFixed(2);
+  document.getElementById('cult-equip-battle').textContent = '×' + getEquipBattleMultiplier().toFixed(2);
   var realm = REALMS[gameState.realmIndex];
   var required = realm.costs[gameState.stageIndex];
   var remaining = Math.max(0, required - gameState.currentPower);
   var sec = gps > 0 ? Math.ceil(remaining / gps) : '∞';
-  document.getElementById('cult-eta').textContent = '预计突破剩余：' + (gps === 0 ? '无' : sec + '秒');
+  document.getElementById('cult-eta').textContent = (gps === 0 ? '无' : sec + '秒');
   document.getElementById('formula-atk').textContent = baseATKs[gameState.realmIndex];
   document.getElementById('formula-hp').textContent = baseHPs[gameState.realmIndex];
   document.getElementById('formula-gain').textContent = baseGains[gameState.realmIndex];
