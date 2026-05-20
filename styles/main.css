@@ -4377,3 +4377,1566 @@ body.light-theme .encounter-option:hover {
     color-mix(in srgb, var(--folio-red) 7%, transparent);
   box-shadow: none;
 }
+
+/* ============================================================
+   修道成仙 · UI Refresh — calm ink-and-jade theme
+   一层在所有旧主题之后的统一覆盖，专注「玩得舒服」
+   ============================================================ */
+
+:root {
+  --r-bg-0: #0a0d14;
+  --r-bg-1: #131826;
+  --r-bg-2: #1c2336;
+  --r-panel: rgba(20, 26, 40, 0.78);
+  --r-panel-solid: #161c2c;
+  --r-card: rgba(255, 255, 255, 0.035);
+  --r-card-hover: rgba(232, 200, 124, 0.10);
+  --r-line: rgba(232, 200, 124, 0.16);
+  --r-line-strong: rgba(232, 200, 124, 0.38);
+  --r-text: #ece2c8;
+  --r-muted: #8e8773;
+  --r-title: #f5e7c0;
+  --r-gold: #e8c87c;
+  --r-gold-bright: #f5d685;
+  --r-gold-deep: #b88d3c;
+  --r-jade: #7eb8a0;
+  --r-jade-bright: #a0d4be;
+  --r-ink: #8aa9c7;
+  --r-danger: #d97a64;
+  --r-success: #9bbf7a;
+  --r-shadow-soft: 0 24px 60px rgba(0, 0, 0, 0.4);
+  --r-shadow-card: 0 6px 18px rgba(0, 0, 0, 0.22);
+  --r-button-text: #1a1408;
+}
+
+body.light-theme {
+  --r-bg-0: #f3ebd6;
+  --r-bg-1: #faf2dd;
+  --r-bg-2: #efe5cb;
+  --r-panel: rgba(255, 250, 235, 0.82);
+  --r-panel-solid: #fbf3df;
+  --r-card: rgba(255, 252, 240, 0.62);
+  --r-card-hover: rgba(232, 200, 124, 0.18);
+  --r-line: rgba(155, 115, 50, 0.20);
+  --r-line-strong: rgba(155, 115, 50, 0.46);
+  --r-text: #3a2e1c;
+  --r-muted: #7b6a4f;
+  --r-title: #5a3d10;
+  --r-gold: #b08036;
+  --r-gold-bright: #d09a48;
+  --r-gold-deep: #8a6320;
+  --r-jade: #6a9078;
+  --r-jade-bright: #4f7a64;
+  --r-ink: #5a7693;
+  --r-danger: #b04a3a;
+  --r-success: #6a8a4a;
+  --r-shadow-soft: 0 22px 50px rgba(120, 90, 40, 0.16);
+  --r-shadow-card: 0 6px 16px rgba(120, 90, 40, 0.10);
+  --r-button-text: #f8f0d8;
+}
+
+/* -- Background : remove the red bookmark stripe and harsh grid -- */
+body {
+  background:
+    radial-gradient(ellipse 90% 60% at 20% -10%, color-mix(in srgb, var(--r-gold) 14%, transparent), transparent 60%),
+    radial-gradient(ellipse 80% 60% at 90% 110%, color-mix(in srgb, var(--r-jade) 14%, transparent), transparent 60%),
+    linear-gradient(160deg, var(--r-bg-0) 0%, var(--r-bg-1) 50%, var(--r-bg-2) 100%) !important;
+}
+
+body.light-theme {
+  background:
+    radial-gradient(ellipse 90% 60% at 20% -10%, color-mix(in srgb, var(--r-gold) 18%, transparent), transparent 62%),
+    radial-gradient(ellipse 80% 60% at 90% 110%, color-mix(in srgb, var(--r-jade) 14%, transparent), transparent 62%),
+    linear-gradient(160deg, var(--r-bg-0) 0%, var(--r-bg-1) 50%, var(--r-bg-2) 100%) !important;
+}
+
+#main-container,
+#game-container {
+  background: transparent !important;
+}
+
+#main-container::before,
+#game-container::before {
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--r-gold) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(0deg, color-mix(in srgb, var(--r-gold) 5%, transparent) 1px, transparent 1px) !important;
+  background-size: 96px 96px !important;
+  opacity: 0.5 !important;
+  mask-image: linear-gradient(180deg, transparent, #000 20%, #000 80%, transparent) !important;
+}
+
+.stars {
+  mix-blend-mode: normal !important;
+  opacity: 0.6 !important;
+}
+
+.star {
+  width: 2px !important;
+  height: 2px !important;
+  background: color-mix(in srgb, var(--r-gold) 80%, #ffffff) !important;
+  border-radius: 50% !important;
+  transform: none !important;
+  box-shadow: 0 0 4px color-mix(in srgb, var(--r-gold) 60%, transparent) !important;
+}
+
+body.light-theme .star {
+  background: color-mix(in srgb, var(--r-gold) 70%, transparent) !important;
+  box-shadow: none !important;
+  opacity: 0.45 !important;
+}
+
+.cloud {
+  height: auto !important;
+  background: color-mix(in srgb, var(--r-jade) 30%, #ffffff) !important;
+  border-radius: 50% !important;
+  opacity: 0.08 !important;
+}
+
+body.light-theme .cloud {
+  background: #c9c4b4 !important;
+  opacity: 0.18 !important;
+}
+
+.mountain {
+  opacity: 0.45 !important;
+  filter: none !important;
+}
+
+.mountain svg {
+  transform: none !important;
+}
+
+.mountain polygon:nth-child(1) {
+  fill: color-mix(in srgb, var(--r-bg-0) 70%, var(--r-jade)) !important;
+}
+
+.mountain polygon:nth-child(2) {
+  fill: color-mix(in srgb, var(--r-bg-0) 78%, var(--r-jade)) !important;
+}
+
+.mountain polygon:nth-child(3) {
+  fill: color-mix(in srgb, var(--r-bg-0) 88%, var(--r-jade)) !important;
+}
+
+body.light-theme .mountain {
+  opacity: 0.20 !important;
+}
+
+body.light-theme .mountain polygon:nth-child(1) {
+  fill: color-mix(in srgb, var(--r-bg-2) 50%, var(--r-jade)) !important;
+}
+
+body.light-theme .mountain polygon:nth-child(2) {
+  fill: color-mix(in srgb, var(--r-bg-2) 62%, var(--r-jade)) !important;
+}
+
+body.light-theme .mountain polygon:nth-child(3) {
+  fill: color-mix(in srgb, var(--r-bg-2) 78%, var(--r-jade)) !important;
+}
+
+/* -- Title screen : center, no red bookmark -- */
+#main-container {
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 0 !important;
+}
+
+.title-wrapper,
+.save-panel,
+#left-panel,
+#right-panel,
+.demo-complete-panel {
+  border: 1px solid var(--r-line) !important;
+  border-radius: 14px !important;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(0, 0, 0, 0.06)),
+    var(--r-panel) !important;
+  box-shadow: var(--r-shadow-soft), inset 0 1px 0 rgba(255, 255, 255, 0.06) !important;
+  backdrop-filter: blur(14px) !important;
+}
+
+body.light-theme .title-wrapper,
+body.light-theme .save-panel,
+body.light-theme #left-panel,
+body.light-theme #right-panel,
+body.light-theme .demo-complete-panel {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.20)),
+    var(--r-panel) !important;
+  box-shadow: var(--r-shadow-soft), inset 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+}
+
+.title-wrapper::before,
+.save-panel::before,
+#left-panel::before,
+#right-panel::before {
+  inset: 6px !important;
+  border: 1px solid color-mix(in srgb, var(--r-gold) 12%, transparent) !important;
+  border-radius: 10px !important;
+}
+
+.title-wrapper::after {
+  display: none !important;
+}
+
+.title-wrapper {
+  width: auto !important;
+  align-items: center !important;
+  text-align: center !important;
+  padding: 56px 80px 60px !important;
+  gap: 14px !important;
+  transform: none !important;
+}
+
+.game-title {
+  font-size: clamp(56px, 7vw, 80px) !important;
+  line-height: 1 !important;
+  font-weight: 700 !important;
+  text-align: center !important;
+  letter-spacing: 14px !important;
+  color: var(--r-gold-bright) !important;
+  text-shadow:
+    0 0 28px color-mix(in srgb, var(--r-gold) 32%, transparent),
+    0 4px 14px rgba(0, 0, 0, 0.45) !important;
+  animation: none !important;
+}
+
+body.light-theme .game-title {
+  color: var(--r-gold-deep) !important;
+  text-shadow:
+    0 0 18px color-mix(in srgb, var(--r-gold) 28%, transparent),
+    0 2px 6px rgba(255, 255, 255, 0.6) !important;
+}
+
+.subtitle {
+  max-width: none !important;
+  margin: 4px 0 6px !important;
+  color: color-mix(in srgb, var(--r-text) 78%, transparent) !important;
+  font-size: 17px !important;
+  letter-spacing: 5px !important;
+  text-align: center !important;
+  text-shadow: none !important;
+}
+
+.byline {
+  padding: 0 !important;
+  border-left: none !important;
+  margin: 0 0 14px !important;
+  color: color-mix(in srgb, var(--r-muted) 85%, transparent) !important;
+  font-size: 13px !important;
+  letter-spacing: 3px !important;
+  text-align: center !important;
+}
+
+/* -- Primary gold button : elegant pill replacing red block -- */
+.btn-start,
+.btn-explore,
+.intro-story-btn.primary,
+.demo-complete-btn,
+.btn-use {
+  color: var(--r-button-text) !important;
+  border: 1px solid color-mix(in srgb, var(--r-gold-deep) 60%, transparent) !important;
+  border-radius: 999px !important;
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--r-gold-bright) 92%, #ffffff) 0%,
+      var(--r-gold) 52%,
+      var(--r-gold-deep) 100%) !important;
+  box-shadow:
+    0 8px 24px color-mix(in srgb, var(--r-gold) 30%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.55) !important;
+  text-shadow: none !important;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease, background 0.2s ease !important;
+  font-weight: 600 !important;
+}
+
+.btn-start {
+  padding: 16px 60px !important;
+  font-size: 22px !important;
+  letter-spacing: 10px !important;
+  margin-top: 10px !important;
+}
+
+.btn-explore {
+  padding: 14px !important;
+  font-size: 17px !important;
+  letter-spacing: 8px !important;
+}
+
+.btn-start:hover,
+.btn-explore:hover:not(:disabled),
+.intro-story-btn.primary:hover,
+.demo-complete-btn:hover,
+.btn-use:hover:not(:disabled) {
+  transform: translateY(-2px) !important;
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--r-gold-bright) 96%, #ffffff) 0%,
+      color-mix(in srgb, var(--r-gold) 92%, #ffffff) 52%,
+      var(--r-gold-deep) 100%) !important;
+  box-shadow:
+    0 12px 32px color-mix(in srgb, var(--r-gold) 42%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65) !important;
+  filter: brightness(1.06) !important;
+}
+
+.btn-start:active,
+.btn-explore:active,
+.intro-story-btn.primary:active,
+.demo-complete-btn:active,
+.btn-use:active {
+  transform: translateY(0) !important;
+  filter: brightness(0.96) !important;
+}
+
+.btn-start::before {
+  display: none !important;
+}
+
+/* -- Game layout : restore horizontal tabs, breathe in left panel -- */
+#game-container {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 22px !important;
+  padding: 24px !important;
+  align-items: stretch !important;
+}
+
+#game-container.active {
+  display: flex !important;
+}
+
+#left-panel {
+  flex: 0 0 clamp(330px, 30vw, 420px) !important;
+  min-width: 0 !important;
+  padding: 40px 28px 24px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  overflow: hidden !important;
+}
+
+#right-panel {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  grid-template-columns: none !important;
+  grid-template-rows: none !important;
+  padding: 22px 26px !important;
+  overflow: hidden !important;
+}
+
+#realm-text {
+  font-size: 28px !important;
+  letter-spacing: 8px !important;
+  color: var(--r-title) !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.35) !important;
+  margin-bottom: 14px !important;
+}
+
+body.light-theme #realm-text {
+  color: var(--r-title) !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) !important;
+}
+
+#realm-divider,
+.cult-divider,
+.alchemy-divider {
+  background: linear-gradient(90deg, transparent, var(--r-line-strong), transparent) !important;
+  height: 1px !important;
+}
+
+#progress-wrapper,
+#stats-row,
+.quick-btns,
+.bottom-btns,
+.btn-tribulation {
+  width: min(100%, 320px) !important;
+}
+
+#progress-label {
+  font-size: 13px !important;
+  letter-spacing: 4px !important;
+  color: var(--r-muted) !important;
+}
+
+#progress-bar-outer,
+.skill-cultivate-bar-wrap,
+.achievement-progress {
+  height: 12px !important;
+  border-radius: 999px !important;
+  border: 1px solid color-mix(in srgb, var(--r-gold) 16%, transparent) !important;
+  background: color-mix(in srgb, var(--r-bg-0) 60%, transparent) !important;
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.light-theme #progress-bar-outer,
+body.light-theme .skill-cultivate-bar-wrap,
+body.light-theme .achievement-progress {
+  background: color-mix(in srgb, var(--r-bg-2) 80%, transparent) !important;
+  box-shadow: inset 0 2px 4px rgba(120, 90, 40, 0.18) !important;
+}
+
+#progress-bar-inner,
+.skill-cultivate-bar,
+.achievement-progress-bar {
+  border-radius: 999px !important;
+  background:
+    linear-gradient(90deg, var(--r-jade) 0%, var(--r-gold) 100%) !important;
+  box-shadow: 0 0 12px color-mix(in srgb, var(--r-gold) 30%, transparent) !important;
+}
+
+/* -- Stats : clean horizontal trio -- */
+#stats-row {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr 1fr !important;
+  gap: 8px !important;
+  margin-top: 18px !important;
+  padding: 6px !important;
+  border: 1px solid var(--r-line) !important;
+  border-top: 1px solid var(--r-line) !important;
+  border-bottom: 1px solid var(--r-line) !important;
+  border-radius: 10px !important;
+  background: color-mix(in srgb, var(--r-bg-0) 40%, transparent) !important;
+}
+
+body.light-theme #stats-row {
+  background: rgba(255, 255, 255, 0.35) !important;
+}
+
+.stat-box {
+  border: none !important;
+  border-radius: 7px !important;
+  padding: 10px 4px !important;
+  text-align: center !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.stat-box + .stat-box {
+  border-left: 1px solid var(--r-line) !important;
+}
+
+.stat-box-label {
+  display: block !important;
+  font-size: 12px !important;
+  letter-spacing: 3px !important;
+  color: var(--r-muted) !important;
+  margin-bottom: 4px !important;
+}
+
+.stat-box-value {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  letter-spacing: 1px !important;
+}
+
+#stat-atk,
+#cult-equip-battle {
+  color: var(--r-danger) !important;
+}
+
+#stat-hp {
+  color: var(--r-success) !important;
+}
+
+#stat-stones {
+  color: var(--r-gold-bright) !important;
+}
+
+body.light-theme #stat-stones {
+  color: var(--r-gold-deep) !important;
+}
+
+/* -- Person area : crisper, no sepia wash -- */
+#person-area {
+  flex: 1 1 auto !important;
+  width: 100% !important;
+  margin-top: 18px !important;
+  padding: 12px !important;
+  display: flex !important;
+  align-items: flex-end !important;
+  justify-content: center !important;
+  clip-path: none !important;
+  border-radius: 10px !important;
+  border: 1px solid var(--r-line) !important;
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 90%, color-mix(in srgb, var(--r-gold) 14%, transparent), transparent 70%),
+    linear-gradient(180deg, transparent 0%, color-mix(in srgb, var(--r-jade) 8%, transparent) 100%) !important;
+  overflow: hidden !important;
+}
+
+body.light-theme #person-area {
+  background:
+    radial-gradient(ellipse 70% 60% at 50% 90%, color-mix(in srgb, var(--r-gold) 18%, transparent), transparent 70%),
+    linear-gradient(180deg, transparent 0%, rgba(255, 255, 255, 0.3) 100%) !important;
+}
+
+#person-area::after {
+  display: none !important;
+}
+
+#person-img {
+  width: auto !important;
+  max-width: min(94%, 330px) !important;
+  max-height: 100% !important;
+  object-fit: contain !important;
+  opacity: 1 !important;
+  filter: drop-shadow(0 22px 28px rgba(0, 0, 0, 0.4)) !important;
+}
+
+body.light-theme #person-img {
+  filter: drop-shadow(0 18px 22px rgba(120, 90, 40, 0.22)) !important;
+}
+
+/* -- Quick / bottom buttons : subtle text buttons under person -- */
+.quick-btns,
+.bottom-btns {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 8px !important;
+  padding-top: 12px !important;
+}
+
+.bottom-btn,
+.btn-back,
+.btn-back-dungeon,
+.btn-import,
+.btn-cultivate-skill,
+.btn-upgrade {
+  min-height: 38px !important;
+  padding: 9px 14px !important;
+  font-size: 13px !important;
+  letter-spacing: 3px !important;
+  color: color-mix(in srgb, var(--r-text) 75%, transparent) !important;
+  border: 1px solid var(--r-line) !important;
+  border-radius: 8px !important;
+  background: color-mix(in srgb, var(--r-bg-0) 30%, transparent) !important;
+  text-shadow: none !important;
+  box-shadow: none !important;
+  transition: color 0.18s ease, border-color 0.18s ease, background 0.18s ease, transform 0.18s ease !important;
+}
+
+body.light-theme .bottom-btn,
+body.light-theme .btn-back,
+body.light-theme .btn-back-dungeon,
+body.light-theme .btn-import,
+body.light-theme .btn-cultivate-skill,
+body.light-theme .btn-upgrade {
+  background: rgba(255, 255, 255, 0.36) !important;
+}
+
+.bottom-btn:hover,
+.btn-back:hover,
+.btn-back-dungeon:hover,
+.btn-import:hover,
+.btn-cultivate-skill:hover:not(:disabled),
+.btn-upgrade:hover:not(:disabled) {
+  color: var(--r-gold-bright) !important;
+  border-color: color-mix(in srgb, var(--r-gold) 48%, transparent) !important;
+  background: color-mix(in srgb, var(--r-gold) 10%, transparent) !important;
+}
+
+body.light-theme .bottom-btn:hover,
+body.light-theme .btn-back:hover,
+body.light-theme .btn-back-dungeon:hover,
+body.light-theme .btn-import:hover,
+body.light-theme .btn-cultivate-skill:hover:not(:disabled),
+body.light-theme .btn-upgrade:hover:not(:disabled) {
+  color: var(--r-gold-deep) !important;
+}
+
+.btn-cultivate-skill {
+  padding: 8px 18px !important;
+  letter-spacing: 2px !important;
+}
+
+.btn-upgrade {
+  padding: 9px 22px !important;
+  color: var(--r-gold-bright) !important;
+  border-color: color-mix(in srgb, var(--r-gold) 36%, transparent) !important;
+  background: color-mix(in srgb, var(--r-gold) 12%, transparent) !important;
+}
+
+body.light-theme .btn-upgrade {
+  color: var(--r-gold-deep) !important;
+}
+
+/* -- Tribulation button : danger / accent -- */
+.btn-tribulation {
+  width: min(100%, 320px) !important;
+  margin-top: 14px !important;
+  padding: 13px 0 !important;
+  font-size: 17px !important;
+  letter-spacing: 10px !important;
+  color: #fff !important;
+  border: 1px solid color-mix(in srgb, var(--r-danger) 60%, transparent) !important;
+  border-radius: 999px !important;
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--r-danger) 90%, #ffffff) 0%,
+      var(--r-danger) 100%) !important;
+  box-shadow:
+    0 8px 22px color-mix(in srgb, var(--r-danger) 36%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.4) !important;
+}
+
+.btn-tribulation:hover {
+  filter: brightness(1.08) !important;
+  transform: translateY(-1px) !important;
+  box-shadow:
+    0 12px 28px color-mix(in srgb, var(--r-danger) 50%, transparent),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5) !important;
+}
+
+/* -- Tab bar : horizontal pill row -- */
+#tab-bar {
+  display: flex !important;
+  flex-direction: row !important;
+  gap: 4px !important;
+  margin: 0 0 18px !important;
+  padding: 5px !important;
+  border: 1px solid var(--r-line) !important;
+  border-radius: 12px !important;
+  background: color-mix(in srgb, var(--r-bg-0) 36%, transparent) !important;
+}
+
+body.light-theme #tab-bar {
+  background: rgba(255, 255, 255, 0.38) !important;
+}
+
+.tab-btn {
+  flex: 1 1 0 !important;
+  min-width: 0 !important;
+  min-height: 42px !important;
+  padding: 10px 6px !important;
+  font-size: 14px !important;
+  letter-spacing: 3px !important;
+  text-align: center !important;
+  color: color-mix(in srgb, var(--r-text) 65%, transparent) !important;
+  border: 1px solid transparent !important;
+  border-radius: 8px !important;
+  background: transparent !important;
+  text-shadow: none !important;
+  transition: color 0.18s ease, background 0.18s ease, border-color 0.18s ease !important;
+}
+
+.tab-btn:hover {
+  color: var(--r-text) !important;
+  background: color-mix(in srgb, var(--r-gold) 8%, transparent) !important;
+}
+
+.tab-btn.active {
+  color: var(--r-gold-bright) !important;
+  border-color: color-mix(in srgb, var(--r-gold) 40%, transparent) !important;
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--r-gold) 24%, transparent),
+      color-mix(in srgb, var(--r-gold) 6%, transparent)) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08) !important;
+}
+
+body.light-theme .tab-btn.active {
+  color: var(--r-gold-deep) !important;
+  background:
+    linear-gradient(180deg,
+      color-mix(in srgb, var(--r-gold) 32%, transparent),
+      color-mix(in srgb, var(--r-gold) 10%, transparent)) !important;
+}
+
+#tab-content {
+  flex: 1 1 auto !important;
+  min-height: 0 !important;
+  overflow-y: auto !important;
+  padding: 2px 8px 8px 2px !important;
+  scrollbar-color: color-mix(in srgb, var(--r-gold) 40%, transparent) transparent !important;
+}
+
+#tab-content::-webkit-scrollbar,
+.explore-log::-webkit-scrollbar {
+  width: 8px !important;
+}
+
+#tab-content::-webkit-scrollbar-thumb,
+.explore-log::-webkit-scrollbar-thumb {
+  background: color-mix(in srgb, var(--r-gold) 35%, transparent) !important;
+  border-radius: 8px !important;
+}
+
+/* -- Cult stat rows : clean two-column rows separated by dividers -- */
+.cult-stat-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  margin: 0 !important;
+  padding: 14px 4px !important;
+  border: none !important;
+  border-bottom: 1px solid var(--r-line) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+.cult-stat-row:last-of-type {
+  border-bottom: none !important;
+}
+
+.cult-stat-label {
+  color: var(--r-muted) !important;
+  font-size: 14px !important;
+  letter-spacing: 3px !important;
+}
+
+.cult-stat-value {
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  letter-spacing: 1px !important;
+}
+
+#cult-gain,
+#cult-aptitude,
+#cult-skill,
+#cult-equip-cult,
+#cult-eta,
+#formula-atk,
+#formula-hp,
+#formula-gain {
+  color: var(--r-jade-bright) !important;
+}
+
+body.light-theme #cult-gain,
+body.light-theme #cult-aptitude,
+body.light-theme #cult-skill,
+body.light-theme #cult-equip-cult,
+body.light-theme #cult-eta,
+body.light-theme #formula-atk,
+body.light-theme #formula-hp,
+body.light-theme #formula-gain {
+  color: var(--r-jade-bright) !important;
+}
+
+.cult-formula {
+  margin-top: 8px !important;
+  padding: 10px 12px !important;
+  font-size: 11.5px !important;
+  line-height: 1.7 !important;
+  letter-spacing: 0.5px !important;
+  color: color-mix(in srgb, var(--r-muted) 90%, transparent) !important;
+  border-left: 2px solid color-mix(in srgb, var(--r-gold) 30%, transparent) !important;
+  background: color-mix(in srgb, var(--r-bg-0) 24%, transparent) !important;
+  border-radius: 0 6px 6px 0 !important;
+}
+
+body.light-theme .cult-formula {
+  background: rgba(255, 255, 255, 0.34) !important;
+}
+
+.cult-formula + .cult-formula {
+  margin-top: 6px !important;
+}
+
+/* -- Dungeon / Item / Skill / Equip / Achievement cards as crisp list rows -- */
+.dungeon-list,
+.monster-list,
+#alchemy-container,
+#skill-container,
+#equip-container,
+#achievement-container {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+  border-top: none !important;
+  padding-top: 2px !important;
+}
+
+.dungeon-card,
+.item-card,
+.skill-card,
+.equip-card,
+.achievement-card,
+.monster-row {
+  margin: 0 !important;
+  padding: 14px 16px !important;
+  border: 1px solid var(--r-line) !important;
+  border-radius: 10px !important;
+  background:
+    linear-gradient(180deg, var(--r-card), color-mix(in srgb, var(--r-card) 50%, transparent)) !important;
+  box-shadow: var(--r-shadow-card) !important;
+  transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease !important;
+}
+
+body.light-theme .dungeon-card,
+body.light-theme .item-card,
+body.light-theme .skill-card,
+body.light-theme .equip-card,
+body.light-theme .achievement-card,
+body.light-theme .monster-row {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 252, 240, 0.32)) !important;
+}
+
+.dungeon-card:hover,
+.item-card:hover,
+.skill-card:hover,
+.equip-card:hover,
+.achievement-card:hover {
+  transform: translateY(-2px) !important;
+  border-color: var(--r-line-strong) !important;
+  background:
+    linear-gradient(180deg,
+      var(--r-card-hover),
+      color-mix(in srgb, var(--r-card) 60%, transparent)) !important;
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.22) !important;
+}
+
+body.light-theme .dungeon-card:hover,
+body.light-theme .item-card:hover,
+body.light-theme .skill-card:hover,
+body.light-theme .equip-card:hover,
+body.light-theme .achievement-card:hover {
+  background:
+    linear-gradient(180deg, rgba(255, 252, 240, 0.92), rgba(241, 226, 188, 0.42)) !important;
+  box-shadow: 0 12px 28px rgba(120, 90, 40, 0.16) !important;
+}
+
+.dungeon-card.locked {
+  opacity: 0.5 !important;
+}
+
+.dungeon-card.locked:hover {
+  transform: none !important;
+  box-shadow: var(--r-shadow-card) !important;
+}
+
+.dungeon-name,
+.item-name,
+.skill-name,
+.equip-name,
+.encounter-title,
+.encounter-option-name,
+.achievement-title {
+  color: var(--r-title) !important;
+  font-size: 16px !important;
+  letter-spacing: 3px !important;
+  font-weight: 600 !important;
+}
+
+.dungeon-req,
+.item-effect,
+.skill-desc,
+.equip-desc,
+.equip-cost,
+.detail-desc,
+.encounter-desc,
+.encounter-option-desc,
+.achievement-desc,
+.achievement-count,
+.slot-info {
+  color: var(--r-muted) !important;
+  letter-spacing: 1.5px !important;
+}
+
+.monster-name {
+  color: var(--r-text) !important;
+  letter-spacing: 2px !important;
+}
+
+.monster-stats {
+  color: var(--r-muted) !important;
+  font-size: 13px !important;
+}
+
+.monster-drop {
+  color: var(--r-gold-bright) !important;
+  background: color-mix(in srgb, var(--r-gold) 14%, transparent) !important;
+  border: 1px solid color-mix(in srgb, var(--r-gold) 24%, transparent) !important;
+  padding: 2px 9px !important;
+  border-radius: 12px !important;
+  font-size: 11.5px !important;
+  letter-spacing: 1px !important;
+}
+
+body.light-theme .monster-drop {
+  color: var(--r-gold-deep) !important;
+}
+
+/* -- Detail title bar -- */
+.detail-header {
+  align-items: center !important;
+  gap: 14px !important;
+  margin-bottom: 4px !important;
+}
+
+.detail-title {
+  display: flex !important;
+  align-items: center !important;
+  min-height: 0 !important;
+  border-bottom: none !important;
+  color: var(--r-title) !important;
+  font-size: 22px !important;
+  letter-spacing: 6px !important;
+  text-shadow: 0 1px 6px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.light-theme .detail-title {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+}
+
+.detail-section-title {
+  margin: 12px 0 8px !important;
+  color: var(--r-gold) !important;
+  font-size: 14px !important;
+  letter-spacing: 4px !important;
+}
+
+body.light-theme .detail-section-title {
+  color: var(--r-gold-deep) !important;
+}
+
+.detail-desc {
+  padding: 10px 14px !important;
+  border-radius: 8px !important;
+  background: color-mix(in srgb, var(--r-bg-0) 30%, transparent) !important;
+  line-height: 1.75 !important;
+  font-size: 13.5px !important;
+}
+
+body.light-theme .detail-desc {
+  background: rgba(255, 255, 255, 0.4) !important;
+}
+
+/* -- Explore status grid -- */
+.explore-status {
+  margin: 14px 0 !important;
+  padding: 12px !important;
+  border: 1px solid var(--r-line) !important;
+  border-radius: 10px !important;
+  background: color-mix(in srgb, var(--r-bg-0) 24%, transparent) !important;
+  gap: 10px !important;
+}
+
+body.light-theme .explore-status {
+  background: rgba(255, 255, 255, 0.4) !important;
+}
+
+.explore-status-item {
+  background: transparent !important;
+  border: none !important;
+  border-right: 1px solid var(--r-line) !important;
+  border-radius: 0 !important;
+  padding: 4px 12px !important;
+}
+
+.explore-status-item:nth-child(3n),
+.explore-status-item.wide {
+  border-right: none !important;
+}
+
+.explore-status-item.wide {
+  border-top: 1px solid var(--r-line) !important;
+  padding-top: 10px !important;
+  margin-top: 4px !important;
+}
+
+.explore-status-item span {
+  color: var(--r-muted) !important;
+  letter-spacing: 3px !important;
+}
+
+.explore-status-item strong {
+  color: var(--r-gold-bright) !important;
+  font-size: 15px !important;
+  letter-spacing: 1px !important;
+}
+
+body.light-theme .explore-status-item strong {
+  color: var(--r-gold-deep) !important;
+}
+
+/* -- Explore / Challenge log -- */
+.explore-log {
+  padding: 12px 14px !important;
+  border: 1px solid var(--r-line) !important;
+  border-radius: 10px !important;
+  background: color-mix(in srgb, var(--r-bg-0) 28%, transparent) !important;
+  max-height: 240px !important;
+  gap: 6px !important;
+}
+
+body.light-theme .explore-log {
+  background: rgba(255, 255, 255, 0.36) !important;
+}
+
+.log-entry {
+  border-left: 2px solid var(--r-line) !important;
+  padding: 4px 10px !important;
+  font-size: 13px !important;
+  letter-spacing: 1.5px !important;
+  color: color-mix(in srgb, var(--r-text) 78%, transparent) !important;
+  border-radius: 0 4px 4px 0 !important;
+}
+
+.log-entry.win {
+  border-left-color: var(--r-success) !important;
+  color: var(--r-success) !important;
+}
+
+.log-entry.lose {
+  border-left-color: var(--r-danger) !important;
+  color: var(--r-danger) !important;
+}
+
+.log-entry.loot {
+  border-left-color: var(--r-gold) !important;
+  color: var(--r-gold-bright) !important;
+}
+
+body.light-theme .log-entry.loot {
+  color: var(--r-gold-deep) !important;
+}
+
+.log-entry.final {
+  border-left-color: var(--r-gold-bright) !important;
+  color: var(--r-gold-bright) !important;
+  font-weight: bold !important;
+}
+
+/* -- Encounter -- */
+.encounter-panel {
+  padding: 18px !important;
+  margin-top: 12px !important;
+  border: 1px solid color-mix(in srgb, var(--r-gold) 30%, transparent) !important;
+  border-radius: 12px !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--r-gold) 10%, transparent), color-mix(in srgb, var(--r-jade) 6%, transparent)),
+    color-mix(in srgb, var(--r-bg-0) 36%, transparent) !important;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.22) !important;
+}
+
+body.light-theme .encounter-panel {
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--r-gold) 14%, transparent), color-mix(in srgb, var(--r-jade) 8%, transparent)),
+    rgba(255, 255, 255, 0.6) !important;
+}
+
+.encounter-kicker {
+  color: var(--r-gold) !important;
+  letter-spacing: 3px !important;
+}
+
+body.light-theme .encounter-kicker {
+  color: var(--r-gold-deep) !important;
+}
+
+.encounter-title {
+  color: var(--r-title) !important;
+  font-size: 19px !important;
+  letter-spacing: 4px !important;
+}
+
+.encounter-desc {
+  color: var(--r-muted) !important;
+  line-height: 1.7 !important;
+}
+
+.encounter-options {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)) !important;
+  gap: 10px !important;
+  border-top: none !important;
+  margin-top: 4px !important;
+}
+
+.encounter-option {
+  min-height: 0 !important;
+  padding: 12px 14px !important;
+  border: 1px solid var(--r-line) !important;
+  border-radius: 10px !important;
+  background: color-mix(in srgb, var(--r-bg-0) 24%, transparent) !important;
+  box-shadow: none !important;
+  text-align: left !important;
+  transition: transform 0.18s ease, border-color 0.18s ease, background 0.18s ease !important;
+}
+
+body.light-theme .encounter-option {
+  background: rgba(255, 255, 255, 0.5) !important;
+}
+
+.encounter-option + .encounter-option {
+  border-left: 1px solid var(--r-line) !important;
+}
+
+.encounter-option:hover {
+  transform: translateY(-2px) !important;
+  border-color: var(--r-line-strong) !important;
+  background: color-mix(in srgb, var(--r-gold) 12%, transparent) !important;
+}
+
+.encounter-option-tone {
+  color: var(--r-jade-bright) !important;
+}
+
+.encounter-option-name {
+  color: var(--r-title) !important;
+}
+
+.encounter-option-desc {
+  color: var(--r-muted) !important;
+  line-height: 1.55 !important;
+}
+
+/* -- Achievement -- */
+.achievement-summary {
+  padding: 14px 18px !important;
+  border: 1px solid var(--r-line) !important;
+  border-radius: 10px !important;
+  background: color-mix(in srgb, var(--r-bg-0) 28%, transparent) !important;
+  color: var(--r-muted) !important;
+  margin-bottom: 12px !important;
+  line-height: 1.7 !important;
+}
+
+body.light-theme .achievement-summary {
+  background: rgba(255, 255, 255, 0.5) !important;
+}
+
+.achievement-card.complete {
+  border-color: color-mix(in srgb, var(--r-gold) 38%, transparent) !important;
+  background:
+    linear-gradient(180deg, color-mix(in srgb, var(--r-gold) 12%, transparent), color-mix(in srgb, var(--r-gold) 4%, transparent)) !important;
+}
+
+.achievement-status {
+  color: var(--r-gold) !important;
+  letter-spacing: 2px !important;
+}
+
+.achievement-reward {
+  color: var(--r-jade-bright) !important;
+}
+
+body.light-theme .achievement-reward {
+  color: var(--r-jade-bright) !important;
+}
+
+.btn-achievement-claim {
+  border-radius: 8px !important;
+  border: 1px solid color-mix(in srgb, var(--r-gold-deep) 60%, transparent) !important;
+  background: linear-gradient(180deg, var(--r-gold-bright), var(--r-gold)) !important;
+  color: var(--r-button-text) !important;
+  font-weight: 700 !important;
+}
+
+.btn-achievement-claim:hover:not(:disabled) {
+  filter: brightness(1.06) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* -- Skill rings, equip quality -- */
+.skill-ring-bg {
+  stroke: color-mix(in srgb, var(--r-bg-0) 40%, transparent) !important;
+}
+
+.skill-ring-fill {
+  stroke: var(--r-jade-bright) !important;
+}
+
+.skill-ring-pct {
+  color: var(--r-jade-bright) !important;
+}
+
+.skill-ring-level {
+  color: var(--r-muted) !important;
+}
+
+.skill-bonus,
+.equip-effect {
+  color: var(--r-jade-bright) !important;
+  font-size: 13px !important;
+  letter-spacing: 1.5px !important;
+}
+
+body.light-theme .skill-bonus,
+body.light-theme .equip-effect {
+  color: var(--r-jade-bright) !important;
+}
+
+.equip-icon-wrap {
+  border-radius: 10px !important;
+}
+
+.equip-icon-wrap.quality-0 {
+  border-color: color-mix(in srgb, var(--r-muted) 50%, transparent) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+}
+
+.equip-icon-wrap.quality-1 {
+  border-color: var(--r-ink) !important;
+  background: color-mix(in srgb, var(--r-ink) 14%, transparent) !important;
+  box-shadow: 0 0 16px color-mix(in srgb, var(--r-ink) 22%, transparent) !important;
+}
+
+.equip-icon-wrap.quality-2 {
+  border-color: var(--r-gold) !important;
+  background: color-mix(in srgb, var(--r-gold) 14%, transparent) !important;
+  box-shadow: 0 0 18px color-mix(in srgb, var(--r-gold) 28%, transparent) !important;
+}
+
+.equip-icon-wrap.quality-3 {
+  border-color: var(--r-gold-bright) !important;
+  background: color-mix(in srgb, var(--r-gold) 22%, transparent) !important;
+  box-shadow: 0 0 24px color-mix(in srgb, var(--r-gold) 40%, transparent) !important;
+}
+
+.equip-quality-badge {
+  border-radius: 6px !important;
+  letter-spacing: 2px !important;
+}
+
+.equip-quality-badge.q0 { color: var(--r-muted) !important; background: rgba(255,255,255,0.06) !important; border: 1px solid var(--r-line) !important; }
+.equip-quality-badge.q1 { color: var(--r-ink) !important; background: color-mix(in srgb, var(--r-ink) 14%, transparent) !important; border: 1px solid color-mix(in srgb, var(--r-ink) 34%, transparent) !important; }
+.equip-quality-badge.q2 { color: var(--r-gold) !important; background: color-mix(in srgb, var(--r-gold) 14%, transparent) !important; border: 1px solid color-mix(in srgb, var(--r-gold) 34%, transparent) !important; }
+.equip-quality-badge.q3 { color: var(--r-gold-bright) !important; background: color-mix(in srgb, var(--r-gold) 20%, transparent) !important; border: 1px solid var(--r-gold) !important; }
+
+body.light-theme .equip-quality-badge.q2,
+body.light-theme .equip-quality-badge.q3 {
+  color: var(--r-gold-deep) !important;
+}
+
+.equip-max-badge {
+  border-radius: 8px !important;
+  border: 1px solid color-mix(in srgb, var(--r-gold) 32%, transparent) !important;
+  background: color-mix(in srgb, var(--r-gold) 14%, transparent) !important;
+  color: var(--r-gold-bright) !important;
+}
+
+body.light-theme .equip-max-badge {
+  color: var(--r-gold-deep) !important;
+}
+
+/* -- Save panel polish -- */
+.save-panel {
+  min-width: min(460px, calc(100vw - 32px)) !important;
+  padding: 38px 44px 32px !important;
+  gap: 16px !important;
+}
+
+.save-title {
+  color: var(--r-title) !important;
+  font-size: 26px !important;
+  letter-spacing: 8px !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3) !important;
+}
+
+body.light-theme .save-title {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+}
+
+.save-slot {
+  padding: 16px 22px !important;
+  border-radius: 10px !important;
+  border: 1px solid var(--r-line) !important;
+  background:
+    linear-gradient(180deg, var(--r-card), color-mix(in srgb, var(--r-card) 50%, transparent)) !important;
+  transition: border-color 0.2s ease, background 0.2s ease, transform 0.2s ease !important;
+  box-shadow: none !important;
+}
+
+body.light-theme .save-slot {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.62), rgba(255, 252, 240, 0.32)) !important;
+}
+
+.save-slot:hover {
+  border-color: var(--r-line-strong) !important;
+  background: color-mix(in srgb, var(--r-gold) 10%, transparent) !important;
+  transform: translateX(4px) !important;
+}
+
+.save-slot .slot-number {
+  color: var(--r-gold) !important;
+  font-size: 22px !important;
+  letter-spacing: 0 !important;
+}
+
+.save-slot:hover .slot-number,
+.save-slot:hover .slot-arrow {
+  color: var(--r-gold-bright) !important;
+}
+
+body.light-theme .save-slot .slot-number,
+body.light-theme .save-slot:hover .slot-number,
+body.light-theme .save-slot:hover .slot-arrow {
+  color: var(--r-gold-deep) !important;
+}
+
+.save-slot.delete-target {
+  color: var(--r-danger) !important;
+  border-color: color-mix(in srgb, var(--r-danger) 36%, transparent) !important;
+}
+
+.save-slot.delete-target:hover {
+  background: color-mix(in srgb, var(--r-danger) 14%, transparent) !important;
+}
+
+.save-slot.delete-target .slot-number,
+.save-slot.delete-target:hover .slot-number,
+.save-slot.delete-target .slot-arrow,
+.save-slot.delete-target:hover .slot-arrow {
+  color: var(--r-danger) !important;
+}
+
+#btn-delete-mode,
+#btn-cancel-delete,
+#delete-hint {
+  color: var(--r-danger) !important;
+  border-color: color-mix(in srgb, var(--r-danger) 30%, transparent) !important;
+}
+
+#btn-cancel-delete {
+  color: var(--r-gold) !important;
+  border-color: color-mix(in srgb, var(--r-gold) 32%, transparent) !important;
+}
+
+.save-import-input {
+  border-radius: 8px !important;
+  border: 1px solid var(--r-line) !important;
+  background: color-mix(in srgb, var(--r-bg-0) 60%, transparent) !important;
+  color: var(--r-text) !important;
+}
+
+body.light-theme .save-import-input {
+  background: rgba(255, 255, 255, 0.6) !important;
+}
+
+.save-import-input:focus {
+  border-color: var(--r-line-strong) !important;
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--r-gold) 20%, transparent) !important;
+}
+
+/* -- Empty states -- */
+.alchemy-empty,
+.equip-empty,
+.tab-placeholder {
+  border: 1px dashed var(--r-line) !important;
+  border-radius: 10px !important;
+  background: color-mix(in srgb, var(--r-bg-0) 20%, transparent) !important;
+  color: color-mix(in srgb, var(--r-muted) 80%, transparent) !important;
+  min-height: 220px !important;
+}
+
+body.light-theme .alchemy-empty,
+body.light-theme .equip-empty,
+body.light-theme .tab-placeholder {
+  background: rgba(255, 255, 255, 0.32) !important;
+}
+
+/* -- Toast -- */
+.toast {
+  border-radius: 999px !important;
+  border: 1px solid var(--r-line-strong) !important;
+  background: color-mix(in srgb, var(--r-bg-0) 85%, transparent) !important;
+  color: var(--r-gold-bright) !important;
+  padding: 12px 28px !important;
+  letter-spacing: 3px !important;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.35) !important;
+  backdrop-filter: blur(10px) !important;
+}
+
+body.light-theme .toast {
+  background: rgba(255, 252, 240, 0.94) !important;
+  color: var(--r-gold-deep) !important;
+  box-shadow: 0 14px 28px rgba(120, 90, 40, 0.18) !important;
+}
+
+/* -- Intro story / demo complete overlays -- */
+#intro-story-overlay,
+#demo-complete-overlay {
+  background:
+    radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--r-gold) 16%, transparent), transparent 38%),
+    linear-gradient(180deg, color-mix(in srgb, var(--r-bg-0) 96%, transparent), color-mix(in srgb, var(--r-bg-1) 98%, transparent)) !important;
+}
+
+body.light-theme #intro-story-overlay,
+body.light-theme #demo-complete-overlay {
+  background:
+    radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--r-gold) 20%, transparent), transparent 40%),
+    linear-gradient(180deg, color-mix(in srgb, var(--r-bg-0) 96%, transparent), color-mix(in srgb, var(--r-bg-2) 98%, transparent)) !important;
+}
+
+.intro-story-title,
+.demo-complete-title {
+  color: var(--r-gold-bright) !important;
+  text-shadow: 0 0 24px color-mix(in srgb, var(--r-gold) 28%, transparent) !important;
+}
+
+body.light-theme .intro-story-title,
+body.light-theme .demo-complete-title {
+  color: var(--r-gold-deep) !important;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+}
+
+.intro-story-line {
+  color: var(--r-text) !important;
+}
+
+.intro-story-reward {
+  color: var(--r-gold-bright) !important;
+}
+
+body.light-theme .intro-story-reward {
+  color: var(--r-gold-deep) !important;
+}
+
+.intro-story-btn {
+  border-radius: 999px !important;
+  border: 1px solid var(--r-line) !important;
+  background: color-mix(in srgb, var(--r-bg-0) 50%, transparent) !important;
+  color: var(--r-text) !important;
+  letter-spacing: 5px !important;
+}
+
+.intro-story-btn:hover {
+  border-color: var(--r-line-strong) !important;
+  color: var(--r-gold-bright) !important;
+  background: color-mix(in srgb, var(--r-gold) 10%, transparent) !important;
+  transform: translateY(-1px) !important;
+}
+
+body.light-theme .intro-story-btn {
+  background: rgba(255, 255, 255, 0.7) !important;
+}
+
+body.light-theme .intro-story-btn:hover {
+  color: var(--r-gold-deep) !important;
+}
+
+.demo-complete-panel {
+  border-radius: 14px !important;
+  border: 1px solid color-mix(in srgb, var(--r-gold) 36%, transparent) !important;
+}
+
+.demo-complete-text {
+  color: var(--r-text) !important;
+}
+
+body.light-theme .demo-complete-text {
+  color: var(--r-text) !important;
+}
+
+/* -- Challenge result -- */
+.challenge-result {
+  border-radius: 10px !important;
+  padding: 20px !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18) !important;
+}
+
+.challenge-result.win {
+  background: color-mix(in srgb, var(--r-success) 14%, transparent) !important;
+  border: 1px solid color-mix(in srgb, var(--r-success) 36%, transparent) !important;
+}
+
+.challenge-result.lose {
+  background: color-mix(in srgb, var(--r-danger) 14%, transparent) !important;
+  border: 1px solid color-mix(in srgb, var(--r-danger) 36%, transparent) !important;
+}
+
+.challenge-result.win .challenge-result-title {
+  color: var(--r-success) !important;
+}
+
+.challenge-result.lose .challenge-result-title {
+  color: var(--r-danger) !important;
+}
+
+.challenge-result-reward {
+  color: var(--r-gold-bright) !important;
+}
+
+body.light-theme .challenge-result-reward {
+  color: var(--r-gold-deep) !important;
+}
+
+.challenge-completed-badge {
+  border-radius: 6px !important;
+  background: color-mix(in srgb, var(--r-success) 18%, transparent) !important;
+  color: var(--r-success) !important;
+  border: 1px solid color-mix(in srgb, var(--r-success) 32%, transparent) !important;
+  padding: 2px 9px !important;
+  letter-spacing: 1.5px !important;
+}
+
+/* -- Focus rings -- */
+.btn-start:focus-visible,
+.btn-explore:focus-visible,
+.tab-btn:focus-visible,
+.bottom-btn:focus-visible,
+.btn-back:focus-visible,
+.btn-back-dungeon:focus-visible,
+.btn-import:focus-visible,
+.btn-use:focus-visible,
+.btn-upgrade:focus-visible,
+.btn-cultivate-skill:focus-visible,
+.intro-story-btn:focus-visible,
+.save-slot:focus-visible,
+.encounter-option:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--r-gold) 60%, transparent) !important;
+  outline-offset: 3px !important;
+}
+
+/* -- Responsive -- */
+@media (max-width: 920px) {
+  #game-container,
+  #game-container.active {
+    flex-direction: column !important;
+    padding: 14px !important;
+  }
+
+  #left-panel,
+  #right-panel {
+    flex: none !important;
+    width: 100% !important;
+  }
+
+  #tab-bar {
+    flex-wrap: wrap !important;
+  }
+
+  .tab-btn {
+    flex: 1 1 30% !important;
+    min-width: 86px !important;
+  }
+}
+
+@media (max-width: 640px) {
+  .game-title {
+    font-size: 44px !important;
+    letter-spacing: 8px !important;
+  }
+
+  .title-wrapper {
+    padding: 38px 28px 42px !important;
+  }
+
+  .btn-start {
+    width: 100% !important;
+    padding-left: 18px !important;
+    padding-right: 18px !important;
+    letter-spacing: 8px !important;
+  }
+
+  .save-panel {
+    padding: 28px 22px !important;
+  }
+
+  .quick-btns,
+  .bottom-btns {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* -- Final touches -- */
+.cult-stat-row:first-of-type {
+  padding-top: 2px !important;
+}
